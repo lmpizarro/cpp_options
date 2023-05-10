@@ -79,35 +79,6 @@ int test()
     return 0;
 }
 
-/*
-    https://www.rcpp.org/
-    https://github.com/RcppCore/Rcpp
-    https://stackoverflow.com/questions/11169418/numpy-style-arrays-for-c
-*/
-
-int hello()
-{
-    vector<string> msg{"Hello", "C++", "World", "from", "VS Code", "and the C++ extension!"};
-    vector<float> numbers{1.0, 2.3};
-
-    for (const string &word : msg)
-    {
-        cout << word << " ";
-    }
-
-    cout << "\n"
-         << "";
-
-    for (const float &number : numbers)
-    {
-        cout << number << " ";
-    }
-
-    cout << endl;
-
-    return 0;
-}
-
 int main()
 {
 
