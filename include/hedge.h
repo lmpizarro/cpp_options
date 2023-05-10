@@ -1,8 +1,9 @@
 #ifndef HEDGE_H
 #define HEDGE_H
 
-class Hedge {
-    public:
+class Hedge
+{
+public:
     float sigma;
     float deltaT;
     float rFr;
@@ -14,7 +15,5 @@ class Hedge {
     float d();
     float p();
     float pp();
-
 };
 #endif
-

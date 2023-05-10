@@ -12,11 +12,10 @@ const float ONE_DAY = 1.0 / 365.0;
 
 int test()
 {
-    Hedge hedge(.3,ONE_DAY, .04, .06);
-    NormalCDF ncdf(0.0,1.0);
+    Hedge hedge(.3, ONE_DAY, .04, .06);
+    NormalCDF ncdf(0.0, 1.0);
     StandardNormalCDF sncdf;
     Option option(49.0, 50.0, .3846, 0.05, .2, 0.0);
-
 
     cout << "d " << hedge.d() << endl;
     cout << "u " << hedge.u() << endl;
@@ -63,12 +62,19 @@ int test()
     cout << un << endl;
     cout << un[0] << endl;
 
-    for(int i = 0; i < m_sin.getsize(); i++){
+    for (int i = 0; i < m_sin.getsize(); i++)
+    {
         float tt = .3846 - i / 365.0;
-        if (tt > 0){Option option(m_sin[i], 50.0, tt, 0.05, .2, 0.0);}
-        else{break;}
+        if (tt > 0)
+        {
+            Option option(m_sin[i], 50.0, tt, 0.05, .2, 0.0);
+        }
+        else
+        {
+            break;
+        }
 
-        cout << m_sin[i] << " " << option.C() <<  " " << tt << endl;
+        cout << m_sin[i] << " " << option.C() << " " << tt << endl;
     }
     return 0;
 }
@@ -81,17 +87,18 @@ int test()
 
 int hello()
 {
-    vector<string> msg {"Hello", "C++", "World", "from", "VS Code", "and the C++ extension!"};
-    vector<float> numbers  {1.0, 2.3};
+    vector<string> msg{"Hello", "C++", "World", "from", "VS Code", "and the C++ extension!"};
+    vector<float> numbers{1.0, 2.3};
 
-    for (const string& word : msg)
+    for (const string &word : msg)
     {
         cout << word << " ";
     }
 
-    cout << "\n" << "";
+    cout << "\n"
+         << "";
 
-    for (const float& number: numbers)
+    for (const float &number : numbers)
     {
         cout << number << " ";
     }
@@ -106,4 +113,3 @@ int main()
 
     test();
 }
-
