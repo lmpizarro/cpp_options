@@ -1,4 +1,6 @@
 #include <iostream>
+#include <string>
+#include <fstream>
 #include <vector>
 #include <string>
 #include <math.h>
@@ -62,19 +64,23 @@ int test()
     cout << un << endl;
     cout << un[0] << endl;
 
+    fstream fout;
+    fout.open("datos.csv", ios::out);
+    fout << "S0," << "C," << "T"<<endl;
+
     for (int i = 0; i < m_sin.getsize(); i++)
     {
         float tt = .3846 - i / 365.0;
         if (tt > 0)
         {
             Option option(m_sin[i], 50.0, tt, 0.05, .2, 0.0);
+            fout << m_sin[i] << "," << option.C() << "," << tt << endl;
         }
         else
         {
             break;
         }
 
-        cout << m_sin[i] << " " << option.C() << " " << tt << endl;
     }
     return 0;
 }
