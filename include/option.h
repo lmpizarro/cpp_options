@@ -8,6 +8,7 @@ class Option
 private:
     float S0, K, r, sigma, T, Q;
     StandardNormalCDF sncdf;
+    float diffPriceC(float, float);
     float np(float x);
     float KPV();
 
@@ -26,7 +27,6 @@ public:
     float vega();
     float gamma();
     void setIV(float);
-    float diffPriceC(float, float);
     float bisection(float, float, float);
     float regulaFalsi(float, float, float);
 };

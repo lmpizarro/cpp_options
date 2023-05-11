@@ -50,8 +50,6 @@ int test()
 
     Signal sgnal(100, 10);
 
-    Sin m_sin(49.0, 5, 1.0, 252);
-
     Normal nrml(0, 1, 252);
 
     Uniform unfrm(0, 1, 10);
@@ -64,19 +62,25 @@ int test()
     cout << un << endl;
     cout << un[0] << endl;
 
+    Sin price_t(49.0, 5, 1.0, 252);
     fstream fout;
     fout.open("datos.csv", ios::out);
-    fout << "S0,"
+    fout << "T,"
+         << "S0,"
          << "C,"
-         << "T" << endl;
+         << "D,"
+         << "G,"
+         << "TH" << endl;
 
-    for (int i = 0; i < m_sin.getsize(); i++)
+    for (int i = 0; i < price_t.getsize(); i++)
     {
-        float tt = .3846 - (float)i / 365.0;
-        if (tt > 0)
+        float tt = (float)i / 252.0;
+        float ttm = 1.0 - tt;
+        if (ttm > 0)
         {
-            Option option(m_sin[i], 50.0, tt, 0.05, .2, 0.0);
-            fout << m_sin[i] << "," << option.C() << "," << (float)i/365.0 << endl;
+            Option option(price_t[i], 50.0, ttm, 0.05, .2, 0.03);
+            fout << tt << "," << price_t[i] << "," << option.C() << ","
+                 << option.deltaC() << "," << option.gamma() << "," << option.thetaC(true) << endl;
         }
         else
         {
