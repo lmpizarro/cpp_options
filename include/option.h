@@ -11,7 +11,6 @@ class Option
 private:
     float S0, K, r, sigma, T, Q;
     StandardNormalCDF sncdf;
-    float diffPriceC(float, float);
     float np(float x);
     float KPV();
 
@@ -30,12 +29,12 @@ public:
     float vega();
     float gamma();
     void setIV(float);
-    float bisection(float, float, float);
-    float regulaFalsi(float, float, float);
     float gS0(){return S0;};
     float gT(){return T;}
+    float diffPriceC(float, float);
 
     friend ostream &operator<<(std::ostream &os, Option &s);
 };
+
 
 #endif

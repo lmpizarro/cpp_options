@@ -7,6 +7,8 @@
 #include "option.h"
 #include "hedge.h"
 #include "signals.h"
+#include "aux.h"
+#include "iv.h"
 
 using namespace std;
 
@@ -39,15 +41,15 @@ int test()
     cout << "rhoP  " << option.rhoP() << endl;
     cout << "vega  " << option.vega() << endl;
 
+    ImpliedVolatility  Iv(&option);
     float price = 1.31;
-    float iv = option.bisection(price, 0, 1);
+    float iv = Iv.bisection(price, 0, 1);
     option.setIV(iv);
     cout << "Call IV calc bisection " << iv << " est price " << option.C() << "price " << price << endl;
     option.setIV(.5);
-    iv = option.regulaFalsi(price, 0, 1);
+    iv = Iv.regulaFalsi(price, 0, 1);
     option.setIV(iv);
     cout << "Call IV calc regulaFalsi " << iv << " est price " << option.C() << " price " << price << endl;
-
     Signal sgnal(100, 10);
 
     Normal nrml(0, 1, 252);
@@ -65,12 +67,7 @@ int test()
     Sin price_t(49.0, 5, 1.0, 252);
     fstream fout;
     fout.open("datos.csv", ios::out);
-    fout << "T,"
-         << "S0,"
-         << "C,"
-         << "D,"
-         << "G,"
-         << "TH" << endl;
+    fout << option_csv_header() << endl;
 
     for (int i = 0; i < price_t.getsize(); i++)
     {
@@ -79,8 +76,7 @@ int test()
         if (ttm > 0)
         {
             Option option(price_t[i], 50.0, ttm, 0.05, .2, 0.03);
-            fout << tt << "," << price_t[i] << "," << option.C() << ","
-                 << option.deltaC() << "," << option.gamma() << "," << option.thetaC(true) << endl;
+            fout << option << endl;
         }
         else
         {

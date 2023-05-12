@@ -101,65 +101,13 @@ float Option::diffPriceC(float p, float s)
     return p - C();
 }
 
-float Option::bisection(float p, float s1, float s2)
-{
-    if (diffPriceC(p, s1) * diffPriceC(p, s2) >= 0)
-    {
-        cout << "You have not assumed right a and b\n";
-        return 0;
-    }
-
-    float sm = s1;
-    while ((s2 - s1) >= 0.001)
-    {
-        // Find middle point
-        sm = (s2 + s1) / 2;
-
-        // Check if middle point is root
-        if (diffPriceC(p, sm) == 0.0)
-            break;
-
-        // Decide the side to repeat the steps
-        else if (diffPriceC(p, sm) * diffPriceC(p, s1) < 0)
-            s2 = sm;
-        else
-            s1 = sm;
-    }
-    return sm;
-}
-
-float Option::regulaFalsi(float p, float s1, float s2)
-{
-    if (diffPriceC(p, s1) * diffPriceC(p, s2) >= 0)
-    {
-        cout << "You have not assumed right a and b\n";
-        return 0;
-    }
-
-    float sm = s1;
-
-    for (int i = 0; i < 1000; i++)
-    {
-        // Find the point that touches x axis
-        sm = (s1 * diffPriceC(p, s2) - s2 * diffPriceC(p, s1)) / (diffPriceC(p, s2) - diffPriceC(p, s1));
-
-        // Check if the above found point is root
-        if (diffPriceC(p, sm) == 0)
-            break;
-
-        // Decide the side to repeat the steps
-        else if (diffPriceC(p, sm) * diffPriceC(p, sm) < 0)
-            s2 = sm;
-        else
-            s1 = sm;
-    }
-    return sm;
-}
 
 ostream &operator<<(ostream &os, Option &s)
 {
-
-    os << s.T << "," << s.S0 << "," << s.C() << ","
-       << s.deltaC() << "," << s.gamma() << "," << s.thetaC(true) << "\n";
+    os << s.T << "," << s.S0 << ","
+       << s.C() << "," << s.deltaC() << "," << s.thetaC(true) << "," << s.rhoC() << ","
+       << s.P() << "," << s.deltaP() << "," << s.thetaP(true) << "," << s.rhoP() << ","
+       << s.gamma()  << "," << s.vega();
     return os;
 };
+
