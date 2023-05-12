@@ -3,12 +3,13 @@
 #include <fstream>
 #include <vector>
 #include <string>
-#include <math.h>
+#include <cmath>
 #include "option.h"
 #include "hedge.h"
 #include "signals.h"
 #include "aux.h"
 #include "iv.h"
+#include "calc_frac.h"
 
 using namespace std;
 
@@ -86,8 +87,11 @@ int test()
     return 0;
 }
 
+
 int main()
 {
+    FractionalDerivative fracDev(.5);
 
-    test();
+    cout << fracDev << endl;
+    // test();
 }
