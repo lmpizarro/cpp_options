@@ -13,10 +13,10 @@ public:
     int size;
 
     Signal(const float, const int size);
+    ~Signal() { data.reset(); };
 
     friend ostream &operator<<(ostream &os, Signal &s);
 
-    ~Signal() { data.reset(); };
 
     Signal operator+(const Signal &s);
 

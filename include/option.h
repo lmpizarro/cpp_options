@@ -2,6 +2,9 @@
 #ifndef OPTION_HH
 #define OPTION_HH
 #include "cdf.h"
+#include <iostream>
+
+using namespace std;
 
 class Option
 {
@@ -29,6 +32,10 @@ public:
     void setIV(float);
     float bisection(float, float, float);
     float regulaFalsi(float, float, float);
+    float gS0(){return S0;};
+    float gT(){return T;}
+
+    friend ostream &operator<<(std::ostream &os, Option &s);
 };
 
 #endif

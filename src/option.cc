@@ -155,3 +155,11 @@ float Option::regulaFalsi(float p, float s1, float s2)
     }
     return sm;
 }
+
+ostream &operator<<(ostream &os, Option &s)
+{
+
+    os << s.T << "," << s.S0 << "," << s.C() << ","
+       << s.deltaC() << "," << s.gamma() << "," << s.thetaC(true) << "\n";
+    return os;
+};
