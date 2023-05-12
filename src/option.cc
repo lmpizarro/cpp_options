@@ -95,10 +95,16 @@ void Option::setIV(float sma)
     sigma = sma;
 }
 
-float Option::diffPriceC(float p, float s)
+float Option::diffPriceC(float pc, float s)
 {
     setIV(s);
-    return p - C();
+    return pc - C();
+}
+
+float Option::diffPriceP(float pp, float s)
+{
+    setIV(s);
+    return pp - P();
 }
 
 

@@ -32,6 +32,7 @@ public:
     float gS0(){return S0;};
     float gT(){return T;}
     float diffPriceC(float, float);
+    float diffPriceP(float, float);
 
     friend ostream &operator<<(std::ostream &os, Option &s);
 };

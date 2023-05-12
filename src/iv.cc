@@ -1,6 +1,9 @@
 #include "iv.h"
 #include "option.h"
-
+/*
+    notes:
+    https://www.mathworks.com/moler/chapters.html
+*/
 ImpliedVolatility::ImpliedVolatility(Option *optn)
 {
     option = optn;
