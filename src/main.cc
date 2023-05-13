@@ -102,7 +102,7 @@ int main__()
     cout << fracDev << endl;
     cout << *firfilter.getOutput() << endl;
     cout << *firfilter.getInput() << endl;
-    cout << firfilter.result() << endl;
+    cout << firfilter.csvResult() << endl;
     // test();
     return 0;
 }

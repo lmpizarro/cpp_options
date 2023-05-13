@@ -27,7 +27,7 @@ void FirFilter::run()
     }
 }
 
-string FirFilter::result()
+string FirFilter::csvResult()
 {
     std::string out_str = "t,inp,out\n";
     for (size_t i = 0; i < getOutput()->getLength(); i++)
