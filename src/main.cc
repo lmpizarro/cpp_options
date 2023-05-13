@@ -92,6 +92,13 @@ int main()
 {
     FractionalDerivative fracDev(.5);
 
+    Sin inp(1,1,1,100);
+    Signal out(0, 100);
+
+    FirFilter firfilter(&fracDev,&inp, &out);
+    firfilter.run();
+
     cout << fracDev << endl;
+    cout << inp << endl;
     // test();
 }

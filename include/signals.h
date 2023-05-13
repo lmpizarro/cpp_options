@@ -11,8 +11,11 @@ public:
     unique_ptr<float[]> data;
 
     size_t size;
-
-    Signal(const float, const size_t size);
+    
+    /// @brief create a constant signal
+    /// @param amp
+    /// @param size
+    Signal(const float amp, const size_t size);
     ~Signal() { data.reset(); };
 
     friend ostream &operator<<(ostream &os, Signal &s);
