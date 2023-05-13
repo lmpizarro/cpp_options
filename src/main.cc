@@ -92,7 +92,7 @@ int test()
 int main__()
 {
     cout << "jjj" ;
-    FractionalDerivative fracDev(.5);
+    FractionalDerivative fracDev(.1);
 
     Sin inp(1,1,1,100);
     Signal out(0, 100);
@@ -100,7 +100,9 @@ int main__()
     firfilter.run();
 
     cout << fracDev << endl;
-    cout << inp << endl;
+    cout << *firfilter.getOutput() << endl;
+    cout << *firfilter.getInput() << endl;
+    cout << firfilter.result() << endl;
     // test();
     return 0;
 }

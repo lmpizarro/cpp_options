@@ -14,6 +14,10 @@ protected:
 public:
     FirFilter(FirCoeffs *, Signal *, Signal *);
     void run();
+    Signal * getInput(){return input;};
+    Signal * getOutput(){return output;};
+    string result();
+
 };
 
 #endif
