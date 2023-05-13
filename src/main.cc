@@ -10,6 +10,7 @@
 #include "aux.h"
 #include "iv.h"
 #include "filter_coeffs.h"
+#include "filters.h"
 
 using namespace std;
 
@@ -70,7 +71,7 @@ int test()
     fout.open("datos.csv", ios::out);
     fout << option_csv_header() << endl;
 
-    for (size_t i = 0; i < price_t.getsize(); i++)
+    for (size_t i = 0; i < price_t.getLength(); i++)
     {
         float tt = (float)i / 252.0;
         float ttm = 1.0 - tt;
@@ -88,17 +89,22 @@ int test()
 }
 
 
-int main()
+int main__()
 {
+    cout << "jjj" ;
     FractionalDerivative fracDev(.5);
 
     Sin inp(1,1,1,100);
     Signal out(0, 100);
-
     FirFilter firfilter(&fracDev,&inp, &out);
     firfilter.run();
 
     cout << fracDev << endl;
     cout << inp << endl;
     // test();
+    return 0;
+}
+int main(){
+    main__();
+    return 0;
 }

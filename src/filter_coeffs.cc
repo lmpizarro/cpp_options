@@ -12,6 +12,14 @@ FirCoeffs::FirCoeffs(const size_t n)
     coefficients = std::make_unique<float[]>(n_coefficients);
 }
 
+float FirCoeffs::getCoefficient(size_t pos){
+    if (pos < getLength()){
+        return coefficients[pos];
+    }else{
+        return 0;
+    }
+}
+
 FractionalDerivative::FractionalDerivative(const float ord) : FirCoeffs(GRUNWALD_LETNIKOV_COEFS)
 {
     float factorial = 1.0;
@@ -45,15 +53,3 @@ float &FirCoeffs::operator[](size_t i)
     return coefficients[i];
 }
 
-FirFilter::FirFilter(FirCoeffs *coeffs, Signal *inp, Signal *out)
-{
-    input = inp;
-    coefficients = coeffs;
-    output = out;
-}
-
-void FirFilter::run(){
-    for(size_t i = 0; i < input->getsize(); i++){
-        output->data[i] = input->data[i];
-    }
-}

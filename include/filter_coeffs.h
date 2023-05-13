@@ -22,6 +22,9 @@ public:
     friend ostream &operator<<(ostream &os, FirCoeffs &s);
 
     float &operator[](size_t i);
+    float getCoefficient(size_t position);
+    size_t getLength(){return n_coefficients;};
+
 };
 
 // Grunwald-Letnikov derivative
@@ -33,17 +36,5 @@ private:
 public:
     FractionalDerivative(const float);
 };
-
-class FirFilter
-{
-protected:
-    FirCoeffs *coefficients;
-    Signal *input;
-    Signal *output;
-
-public:
-    FirFilter(FirCoeffs *, Signal *, Signal *);
-    void run();
-};
-
 #endif
+
