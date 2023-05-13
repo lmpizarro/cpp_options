@@ -9,7 +9,7 @@
 #include "signals.h"
 #include "aux.h"
 #include "iv.h"
-#include "calc_frac.h"
+#include "filter_coeffs.h"
 
 using namespace std;
 
@@ -70,7 +70,7 @@ int test()
     fout.open("datos.csv", ios::out);
     fout << option_csv_header() << endl;
 
-    for (int i = 0; i < price_t.getsize(); i++)
+    for (size_t i = 0; i < price_t.getsize(); i++)
     {
         float tt = (float)i / 252.0;
         float ttm = 1.0 - tt;

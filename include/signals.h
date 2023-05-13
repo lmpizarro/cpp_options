@@ -10,9 +10,9 @@ class Signal
 public:
     unique_ptr<float[]> data;
 
-    int size;
+    size_t size;
 
-    Signal(const float, const int size);
+    Signal(const float, const size_t size);
     ~Signal() { data.reset(); };
 
     friend ostream &operator<<(ostream &os, Signal &s);
@@ -22,27 +22,28 @@ public:
 
     Signal(const Signal &s);
 
-    float &operator[](int i);
+    float &operator[](size_t i);
 
-    int getsize() { return size; }
+    size_t getsize() { return size; }
+
 };
 
 class Sin : public Signal
 {
 public:
-    Sin(const float cc, const float amp, const float cycles, const int size);
+    Sin(const float cc, const float amp, const float cycles, const size_t size);
 };
 
 class Normal : public Signal
 {
 public:
-    Normal(const float loc, const float scale, const int size);
+    Normal(const float loc, const float scale, const size_t size);
 };
 
 class Uniform : public Signal
 {
 public:
-    Uniform(const float lo, const float up, const int size);
+    Uniform(const float lo, const float up, const size_t size);
     Uniform operator+(const Uniform &s);
 };
 
