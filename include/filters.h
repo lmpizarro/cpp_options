@@ -39,4 +39,14 @@ public:
     void run();
 };
 
+class IEMA : public EMA
+{
+
+public:
+    IEMA(const float alf, Signal*, Signal*);
+    IEMA(Signal*, Signal*);
+    void run();
+};
+
+
 #endif

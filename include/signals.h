@@ -62,4 +62,10 @@ public:
     Uniform operator+(const Uniform &s);
 };
 
+class GBM:public Signal
+{
+    public:
+    GBM(const float S0, const float mu, const float vol, const float T, const size_t size);
+};
+
 #endif

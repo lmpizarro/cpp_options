@@ -15,6 +15,18 @@
 using namespace std;
 
 
+
+int ex_option_0()
+{
+
+    Option option(49.0, 50.0, .3846, 0.05, .2, 0.0);
+
+    cout << option.gT() << "," << option.gS0() << "," << option.C() << ","
+    << option.deltaC() << "," << option.gamma() << "," << option.thetaC(true) << endl;
+
+    return 0;
+}
+
 int ex_option()
 {
     Hedge hedge(.3, ONE_DAY, .04, .06);

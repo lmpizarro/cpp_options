@@ -36,7 +36,21 @@ int test_ema(){
 
     return 0;
 }
+
+int test_iema(){
+    const int length = 252;
+    Normal nrml(0, 1, length);
+    GBM inp(1, 0.03, 0.2, 1, 252);
+    Signal out(0, length);
+    IEMA ema(&inp, &out);
+    ema.run();
+    ema.csvResult("filter_out.csv");
+
+    return 0;
+}
+
+
 int main(){
-    ex_fracdev();
+    test_iema();
     return 0;
 }
