@@ -1,7 +1,10 @@
 #include "filters.h"
 #include <iostream>
+#include <fstream>
 
 using namespace std;
+
+void Filter::run(){};
 
 FirFilter::FirFilter(FirCoeffs *coeffs, Signal *inp, Signal *out)
 {
@@ -27,8 +30,10 @@ void FirFilter::run()
     }
 }
 
-string FirFilter::csvResult()
+void FirFilter::csvResult(const string filename)
 {
+    fstream fout;
+    fout.open(filename, ios::out);
     std::string out_str = "t,inp,out\n";
     for (size_t i = 0; i < getOutput()->getLength(); i++)
     {
@@ -36,5 +41,6 @@ string FirFilter::csvResult()
         float out__ = getOutput()->getPosition(i);
         out_str += std::to_string(i) + "," + std::to_string(inp__) + "," + std::to_string(out__) + "\n";
     }
-    return out_str;
+    fout << out_str << endl;
+    fout.close();
 }

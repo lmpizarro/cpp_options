@@ -24,6 +24,7 @@ public:
     float &operator[](size_t i);
     float getCoefficient(size_t position);
     size_t getLength(){return n_coefficients;};
+    ~FirCoeffs() { coefficients.reset(); };
 
 };
 
@@ -35,6 +36,11 @@ private:
 
 public:
     FractionalDerivative(const float);
+};
+
+class WMA:public FirCoeffs{
+    public:
+    WMA();
 };
 #endif
 

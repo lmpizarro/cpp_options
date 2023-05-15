@@ -15,18 +15,15 @@
 
 CXX      := clang++
 CXXFLAGS := -pedantic-errors -Wall -Wextra -Werror
-# LDFLAGS  := -lstdc++ -lm -lomp
 LDFLAGS  := -L/usr/lib -lstdc++ -lm -lomp
 BUILD    := ./build
 OBJ_DIR  := $(BUILD)/objects
 APP_DIR  := $(BUILD)/apps
 TARGET   := main
-INCLUDE  := -Iinclude/
+INCLUDE  := -Iinclude/ -Iinclude/examples
 SRC      :=                      \
-   $(wildcard src/module1/*.cc) \
-   $(wildcard src/module2/*.cc) \
    $(wildcard src/*.cc)         \
-   $(wildcard *.cc)         \
+   $(wildcard src/examples/*.cc)         \
 
 OBJECTS  := $(SRC:%.cc=$(OBJ_DIR)/%.o)
 DEPENDENCIES \

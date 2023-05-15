@@ -4,20 +4,28 @@
 #include "filter_coeffs.h"
 #include "signals.h"
 
-class FirFilter
+class Filter
 {
+
 protected:
-    FirCoeffs *coefficients;
     Signal *input;
     Signal *output;
 
 public:
+    virtual void run();
+};
+
+class FirFilter : public Filter
+{
+protected:
+    FirCoeffs *coefficients;
+
+public:
     FirFilter(FirCoeffs *, Signal *, Signal *);
     void run();
-    Signal * getInput(){return input;};
-    Signal * getOutput(){return output;};
-    string csvResult();
-
+    Signal *getInput() { return input; };
+    Signal *getOutput() { return output; };
+    void csvResult(const std::string);
 };
 
 #endif

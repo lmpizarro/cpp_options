@@ -6,6 +6,7 @@
 
 using namespace std;
 
+const float ONE_DAY = 1.0 / 365.0;
 class Option
 {
 private:
