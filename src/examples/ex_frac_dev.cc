@@ -11,17 +11,17 @@ using namespace std;
 
 int ex_fracdev()
 {
-    cout << "jjj" ;
-    FractionalDerivative fracDev(.99999);
+    size_t length = 252;
+    FractionalDerivative fracDev(.999999);
 
-    Sin inp(1,1,1,100);
-    Signal out(0, 100);
+
+    Sin inp(0.0, 1.0, 1.0, length);
+    Signal out(0, length);
     FirFilter firfilter(&fracDev,&inp, &out);
     firfilter.run();
 
     cout << fracDev << endl;
-    cout << *firfilter.getOutput() << endl;
-    cout << *firfilter.getInput() << endl;
+    cout << out << endl;
     firfilter.csvResult("filter_out.csv");
 
     return 0;

@@ -8,12 +8,13 @@
 #include "aux.h"
 #include "filter_coeffs.h"
 #include "filters.h"
+#include "examples/ex_frac_dev.h"
 
 using namespace std;
 
 
 int test_wma(){
-    WMA wma;
+    WMA4 wma;
     const int length = 252;
     Normal nrml(0, 1, length);
     Signal out(0, length);
@@ -25,7 +26,17 @@ int test_wma(){
 }
 
 
+int test_ema(){
+    const int length = 252;
+    Normal nrml(0, 1, length);
+    Signal out(0, length);
+    EMA ema(&nrml, &out);
+    ema.run();
+    ema.csvResult("filter_out.csv");
+
+    return 0;
+}
 int main(){
-    test_wma();
+    ex_fracdev();
     return 0;
 }

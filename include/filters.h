@@ -13,6 +13,9 @@ protected:
 
 public:
     virtual void run();
+    Signal *getInput() { return input; };
+    Signal *getOutput() { return output; };
+    void csvResult(const std::string);
 };
 
 class FirFilter : public Filter
@@ -23,9 +26,17 @@ protected:
 public:
     FirFilter(FirCoeffs *, Signal *, Signal *);
     void run();
-    Signal *getInput() { return input; };
-    Signal *getOutput() { return output; };
-    void csvResult(const std::string);
+};
+
+class EMA : public Filter
+{
+protected:
+    float alfa = .5;
+
+public:
+    EMA(const float alf, Signal*, Signal*);
+    EMA(Signal*, Signal*);
+    void run();
 };
 
 #endif

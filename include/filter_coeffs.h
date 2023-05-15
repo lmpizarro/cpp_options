@@ -38,9 +38,9 @@ public:
     FractionalDerivative(const float);
 };
 
-class WMA:public FirCoeffs{
+class WMA4:public FirCoeffs{
     public:
-    WMA();
+    WMA4();
 };
 #endif
 

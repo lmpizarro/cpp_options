@@ -32,7 +32,7 @@ FractionalDerivative::FractionalDerivative(const float ord) : FirCoeffs(GRUNWALD
     }
 };
 
-WMA::WMA():FirCoeffs(4){
+WMA4::WMA4():FirCoeffs(4){
     coefficients[0]  = 4.0/10.0;
     coefficients[1]  = 3.0/10.0;
     coefficients[2]  = 2.0/10.0;
