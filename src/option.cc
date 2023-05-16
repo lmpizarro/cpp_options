@@ -141,6 +141,9 @@ ostream &operator<<(ostream &os, Option<float> &s)
     return os;
 };
 
+/*
+https://bytefreaks.net/programming-2/c/c-undefined-reference-to-templated-class-function
+*/
 template class Option<float>;
 template class Option<double>;
 
