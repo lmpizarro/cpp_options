@@ -1,19 +1,19 @@
 #ifndef CDF_HH
 #define CDF_HH
 
-class NormalCDF
+template <typename Type> class NormalCDF
 {
 public:
-    float loc;
-    float scale;
-    NormalCDF(float, float);
-    float cdf(float x);
+    Type loc;
+    Type scale;
+    NormalCDF(Type, Type);
+    Type cdf(Type x);
 };
 
-class StandardNormalCDF : public NormalCDF
+template <typename Type> class StandardNormalCDF: public NormalCDF<Type>
 {
 public:
-    explicit StandardNormalCDF(void);
-    float cdf(float x);
+    StandardNormalCDF(void);
+    Type cdf(Type x);
 };
 #endif

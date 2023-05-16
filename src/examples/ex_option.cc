@@ -31,8 +31,8 @@ int ex_option_0()
 int ex_option()
 {
     Hedge hedge(.3, ONE_DAY, .04, .06);
-    NormalCDF ncdf(0.0, 1.0);
-    StandardNormalCDF sncdf;
+    NormalCDF<float> ncdf(0.0, 1.0);
+    StandardNormalCDF<float> sncdf;
     Option<float> option(49.0, 50.0, .3846, 0.05, .2, 0.0);
 
     cout << "d " << hedge.d() << endl;
@@ -55,7 +55,7 @@ int ex_option()
     cout << "rhoP  " << option.rhoP() << endl;
     cout << "vega  " << option.vega() << endl;
 
-    ImpliedVolatility  Iv(&option);
+    ImpliedVolatility<float>  Iv(&option);
     float price = 1.31;
     float iv = Iv.bisection(price, 0, 1);
     option.setIV(iv);
@@ -88,4 +88,6 @@ int ex_sim_option(){
     sim.run("datos.csv");
     return 0;
 }
+
+
 

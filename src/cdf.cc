@@ -3,23 +3,29 @@
 
 using namespace std;
 
-NormalCDF::NormalCDF(float l, float s)
+template <typename Type> NormalCDF<Type>::NormalCDF(Type l, Type s)
 {
     loc = l;
     scale = s;
 }
 
-float NormalCDF::cdf(float x)
+template <typename Type> Type NormalCDF<Type>::cdf(Type x)
 {
-    float value;
+    Type value;
     value = (x - loc) / (scale * sqrt(2));
 
     return 0.5 * (1 + erf(value));
 };
 
-StandardNormalCDF::StandardNormalCDF(void) : NormalCDF(0, 1) {}
+template <typename Type> StandardNormalCDF<Type>::StandardNormalCDF(void) : NormalCDF<Type>(0, 1) {}
 
-float StandardNormalCDF::cdf(float x)
+template <typename Type> Type StandardNormalCDF<Type>::cdf(Type x)
 {
-    return NormalCDF::cdf(x);
+    return NormalCDF<Type>::cdf(x);
 }
+
+
+template class NormalCDF<float>;
+template class NormalCDF<double>;
+template class StandardNormalCDF<float>;
+template class StandardNormalCDF<double>;

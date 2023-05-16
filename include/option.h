@@ -12,7 +12,7 @@ template <typename Type> class Option
 private:
     Type S0, K, r, sigma, T, Q;
     Type simTime = 0;
-    StandardNormalCDF sncdf;
+    StandardNormalCDF<Type> sncdf;
     Type np(Type x);
     Type KPV();
     Type grealT();

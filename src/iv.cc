@@ -4,12 +4,12 @@
     notes:
     https://www.mathworks.com/moler/chapters.html
 */
-ImpliedVolatility::ImpliedVolatility(Option<float> *optn)
+template <typename Type> ImpliedVolatility<Type>::ImpliedVolatility(Option<Type> *optn)
 {
     option = optn;
 }
 
-float ImpliedVolatility::bisection(float p, float s1, float s2)
+template <typename Type> Type ImpliedVolatility<Type>::bisection(Type p, Type s1, Type s2)
 {
     if (option->diffPriceC(p, s1) * option->diffPriceC(p, s2) >= 0)
     {
@@ -17,7 +17,7 @@ float ImpliedVolatility::bisection(float p, float s1, float s2)
         return 0;
     }
 
-    float sm = s1;
+    Type sm = s1;
     while ((s2 - s1) >= 0.001)
     {
         // Find middle point
@@ -36,7 +36,7 @@ float ImpliedVolatility::bisection(float p, float s1, float s2)
     return sm;
 }
 
-float ImpliedVolatility::regulaFalsi(float p, float s1, float s2)
+template <typename Type> Type ImpliedVolatility<Type>::regulaFalsi(Type p, Type s1, Type s2)
 {
     if (option->diffPriceC(p, s1) * option->diffPriceC(p, s2) >= 0)
     {
@@ -44,7 +44,7 @@ float ImpliedVolatility::regulaFalsi(float p, float s1, float s2)
         return 0;
     }
 
-    float sm = s1;
+    Type sm = s1;
 
     for (int i = 0; i < 1000; i++)
     {
@@ -63,3 +63,7 @@ float ImpliedVolatility::regulaFalsi(float p, float s1, float s2)
     }
     return sm;
 }
+
+
+template class ImpliedVolatility<float>;
+template class ImpliedVolatility<double>;

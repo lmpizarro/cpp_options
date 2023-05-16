@@ -3,13 +3,13 @@
 
 #include "option.h"
 
-class ImpliedVolatility{
+template <typename Type> class ImpliedVolatility{
     private:
-        Option<float> *option;
+        Option<Type> *option;
     public:
-        ImpliedVolatility(Option<float> *);
+        ImpliedVolatility(Option<Type> *);
 
-        float bisection(float, float, float);
-        float regulaFalsi(float, float, float);
+        Type bisection(Type, Type, Type);
+        Type regulaFalsi(Type, Type, Type);
 };
 #endif
