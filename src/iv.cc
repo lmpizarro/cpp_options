@@ -4,7 +4,7 @@
     notes:
     https://www.mathworks.com/moler/chapters.html
 */
-ImpliedVolatility::ImpliedVolatility(Option *optn)
+ImpliedVolatility::ImpliedVolatility(Option<float> *optn)
 {
     option = optn;
 }

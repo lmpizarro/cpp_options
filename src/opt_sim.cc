@@ -8,7 +8,7 @@
 using namespace std;
 
 
-Simulator::Simulator(Option * opt, Signal * sig){
+Simulator::Simulator(Option<float> * opt, Signal * sig){
     option = opt;
     S = sig;
 };
@@ -22,7 +22,7 @@ void Simulator::run(string filename){
     for (size_t i = 0; i < S->getLength(); i++)
     {
         float tt = (float)i / S->getLength();
-        Option calc_option(S->data[i], option->gK(), option->gexT(),
+        Option<float> calc_option(S->data[i], option->gK(), option->gexT(),
         option->gR(), option->gSigma(), option->gQ());
         calc_option.setSimTime(tt);
         fout << calc_option << endl;

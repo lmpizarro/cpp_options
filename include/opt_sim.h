@@ -8,11 +8,11 @@ using namespace std;
 class Simulator
 {
 private:
-    Option *option;
+    Option<float> *option;
     Signal *S;
 
 public:
-    Simulator(Option *opt, Signal * signal);
+    Simulator(Option<float> *opt, Signal * signal);
     void run(string);
 };
 

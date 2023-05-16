@@ -20,7 +20,7 @@ using namespace std;
 int ex_option_0()
 {
 
-    Option option(49.0, 50.0, .3846, 0.05, .2, 0.0);
+    Option<float> option(49.0, 50.0, .3846, 0.05, .2, 0.0);
 
     cout << option.gexT() << "," << option.gS0() << "," << option.C() << ","
     << option.deltaC() << "," << option.gamma() << "," << option.thetaC(true) << endl;
@@ -33,7 +33,7 @@ int ex_option()
     Hedge hedge(.3, ONE_DAY, .04, .06);
     NormalCDF ncdf(0.0, 1.0);
     StandardNormalCDF sncdf;
-    Option option(49.0, 50.0, .3846, 0.05, .2, 0.0);
+    Option<float> option(49.0, 50.0, .3846, 0.05, .2, 0.0);
 
     cout << "d " << hedge.d() << endl;
     cout << "u " << hedge.u() << endl;
@@ -83,7 +83,7 @@ int ex_option()
 int ex_sim_option(){
     size_t length = 252;
     Sin price_t(49.0, 0, 1.0, length);
-    Option option(49, 50.0, 1.0, 0.05, .2, 0.03);
+    Option<float> option(49, 50.0, 1.0, 0.05, .2, 0.03);
     Simulator sim(&option, &price_t);
     sim.run("datos.csv");
     return 0;

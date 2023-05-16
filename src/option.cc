@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Option::Option(Type s0, Type k, Type t, Type rr, Type sma, Type q)
+template <typename Type> Option<Type>::Option(Type s0, Type k, Type t, Type rr, Type sma, Type q)
 {
     S0 = s0;
     K = k;
@@ -14,80 +14,80 @@ Option::Option(Type s0, Type k, Type t, Type rr, Type sma, Type q)
     Q = q;
 }
 
-template <class Type> Type Option::grealT(){
+template <typename Type> Type Option<Type>::grealT(){
     if (simTime < T){
         return T - simTime;
     }
     return 0;
 };
 
-void Option::setSimTime(const float t){
+template <typename Type> void Option<Type>::setSimTime(const Type t){
     simTime = t;
 };
 
-float Option::d1()
+template <typename Type> Type Option<Type>::d1()
 {
-    float T = grealT();
+    Type T = grealT();
     return (log(S0 / K) + (r - Q + pow(sigma, 2) / 2) * T) / (sigma * sqrt(T));
 }
 
-float Option::d2()
+template <typename Type> Type Option<Type>::d2()
 {
-    float T = grealT();
+    Type T = grealT();
     return d1() - sigma * sqrt(T);
 }
 
-float Option::C()
+template <typename Type> Type Option<Type>::C()
 {
-    float T = grealT();
+    Type T = grealT();
     return S0 * exp(-Q * T) * sncdf.cdf(d1()) - KPV() * sncdf.cdf(d2());
 }
 
-float Option::P()
+template <typename Type> Type Option<Type>::P()
 {
-    float T = grealT();
+    Type T = grealT();
     return -S0 * exp(-Q * T) * sncdf.cdf(-d1()) + KPV() * sncdf.cdf(-d2());
 }
 
-float Option::KPV()
+template <typename Type> Type Option<Type>::KPV()
 {
-    float T = grealT();
+    Type T = grealT();
     return K * exp(-r * T);
 }
 
 
 
-float Option::deltaC()
+template <typename Type> Type Option<Type>::deltaC()
 {
     return sncdf.cdf(d1());
 }
 
-float Option::deltaP()
+template <typename Type> Type Option<Type>::deltaP()
 {
     return deltaC() - 1.0;
 }
 
-float Option::np(float x)
+template <typename Type> Type Option<Type>::np(Type x)
 {
     return exp(pow(x, 2) / 2) / (sqrt(2 * M_PI));
 }
 
-float Option::gamma()
+template <typename Type> Type Option<Type>::gamma()
 {
-    float T = grealT();
+    Type T = grealT();
     return np(d1()) / (S0 * sigma * sqrt(T));
 }
 
-float Option::thetaP(bool trading_days)
+template <typename Type> Type Option<Type>::thetaP(bool trading_days)
 {
-    float T = grealT();
+    Type T = grealT();
     return thetaC(trading_days) + r * K * exp(-r * T);
 }
 
-float Option::thetaC(bool trading_days)
+template <typename Type> Type Option<Type>::thetaC(bool trading_days)
 {
-    float T = grealT();
-    float theta = -(S0 * np(d1()) * sigma / (2 * sqrt(T))) - r * K * exp(-r * T) * sncdf.cdf(d2());
+    Type T = grealT();
+    Type theta = -(S0 * np(d1()) * sigma / (2 * sqrt(T))) - r * K * exp(-r * T) * sncdf.cdf(d2());
 
     if (trading_days)
     {
@@ -96,43 +96,43 @@ float Option::thetaC(bool trading_days)
     return theta / 365;
 }
 
-float Option::vega()
+template <typename Type> Type Option<Type>::vega()
 {
-    float T = grealT();
+    Type T = grealT();
     return S0 * sqrt(T) * np(d1());
 }
 
-float Option::rhoC()
+template <typename Type> Type Option<Type>::rhoC()
 {
-    float T = grealT();
+    Type T = grealT();
     return K * T * exp(-r * T) * sncdf.cdf(d2());
 }
 
-float Option::rhoP()
+template <typename Type> Type Option<Type>::rhoP()
 {
-    float T = grealT();
+    Type T = grealT();
     return K * T * exp(-r * T) * sncdf.cdf(-d2());
 }
 
-void Option::setIV(float sma)
+template <typename Type> void Option<Type>::setIV(Type sma)
 {
     sigma = sma;
 }
 
-float Option::diffPriceC(float pc, float s)
+template <typename Type> Type Option<Type>::diffPriceC(Type pc, Type s)
 {
     setIV(s);
     return pc - C();
 }
 
-float Option::diffPriceP(float pp, float s)
+template <typename Type> Type Option<Type>::diffPriceP(Type pp, Type s)
 {
     setIV(s);
     return pp - P();
 }
 
 
-ostream &operator<<(ostream &os, Option &s)
+ostream &operator<<(ostream &os, Option<float> &s)
 {
     os << s.getSimTime() << "," << s.S0 << ","
        << s.C() << "," << s.deltaC() << "," << s.thetaC(true) << "," << s.rhoC() << ","
@@ -141,5 +141,7 @@ ostream &operator<<(ostream &os, Option &s)
     return os;
 };
 
+template class Option<float>;
+template class Option<double>;
 
 

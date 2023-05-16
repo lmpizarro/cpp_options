@@ -7,13 +7,13 @@
 using namespace std;
 
 const float ONE_DAY = 1.0 / 365.0;
-template <class Type> class Option
+template <typename Type> class Option
 {
 private:
     Type S0, K, r, sigma, T, Q;
     Type simTime = 0;
     StandardNormalCDF sncdf;
-    Type np(float x);
+    Type np(Type x);
     Type KPV();
     Type grealT();
 
@@ -31,7 +31,7 @@ public:
     Type rhoP();
     Type vega();
     Type gamma();
-    void setIV(float);
+    void setIV(Type);
     Type gS0() { return S0; };
     Type gK(){return K;};
     Type gexT() { return T; }
@@ -40,10 +40,10 @@ public:
     Type gR() { return r; }
     friend ostream &operator<<(std::ostream &os, Option &s);
 
-    Type diffPriceC(float, float);
-    Type diffPriceP(float, float);
+    Type diffPriceC(Type, Type);
+    Type diffPriceP(Type, Type);
 
-    void setSimTime(const float);
+    void setSimTime(const Type);
     Type getSimTime() { return simTime; };
 };
 
