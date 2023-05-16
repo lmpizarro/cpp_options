@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Option::Option(float s0, float k, float t, float rr, float sma, float q)
+Option::Option(Type s0, Type k, Type t, Type rr, Type sma, Type q)
 {
     S0 = s0;
     K = k;
@@ -14,7 +14,7 @@ Option::Option(float s0, float k, float t, float rr, float sma, float q)
     Q = q;
 }
 
-float Option::grealT(){
+template <class Type> Type Option::grealT(){
     if (simTime < T){
         return T - simTime;
     }

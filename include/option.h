@@ -7,45 +7,44 @@
 using namespace std;
 
 const float ONE_DAY = 1.0 / 365.0;
-class Option
+template <class Type> class Option
 {
 private:
-    float S0, K, r, sigma, T, Q;
-    float simTime = 0;
+    Type S0, K, r, sigma, T, Q;
+    Type simTime = 0;
     StandardNormalCDF sncdf;
-    float np(float x);
-    float KPV();
-    float grealT();
+    Type np(float x);
+    Type KPV();
+    Type grealT();
 
 public:
-    Option(float S0, float K, float T, float r, float sigma, float Q);
-    float d1();
-    float d2();
-    float C();
-    float P();
-    float deltaC();
-    float deltaP();
-    float thetaC(bool);
-    float thetaP(bool);
-    float rhoC();
-    float rhoP();
-    float vega();
-    float gamma();
+    Option(Type S0, Type K, Type T, Type r, Type sigma, Type Q);
+    Type d1();
+    Type d2();
+    Type C();
+    Type P();
+    Type deltaC();
+    Type deltaP();
+    Type thetaC(bool);
+    Type thetaP(bool);
+    Type rhoC();
+    Type rhoP();
+    Type vega();
+    Type gamma();
     void setIV(float);
-    float gS0() { return S0; };
-    float gK(){return K;};
-    float gexT() { return T; }
-    float gSigma() { return sigma; }
-    float gQ() { return Q; }
-    float gR() { return r; }
-    float diffPriceC(float, float);
-    float diffPriceP(float, float);
-
-
+    Type gS0() { return S0; };
+    Type gK(){return K;};
+    Type gexT() { return T; }
+    Type gSigma() { return sigma; }
+    Type gQ() { return Q; }
+    Type gR() { return r; }
     friend ostream &operator<<(std::ostream &os, Option &s);
 
+    Type diffPriceC(float, float);
+    Type diffPriceP(float, float);
+
     void setSimTime(const float);
-    float getSimTime() { return simTime; };
+    Type getSimTime() { return simTime; };
 };
 
 
