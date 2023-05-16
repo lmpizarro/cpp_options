@@ -1,33 +1,8 @@
-#include "option.h"
 #include <cmath>
 #include <iostream>
+#include "option.h"
 
 using namespace std;
-
-float Option::d1()
-{
-    return (log(S0 / K) + (r - Q + pow(sigma, 2) / 2) * T) / (sigma * sqrt(T));
-}
-
-float Option::d2()
-{
-    return d1() - sigma * sqrt(T);
-}
-
-float Option::C()
-{
-    return S0 * exp(-Q * T) * sncdf.cdf(d1()) - KPV() * sncdf.cdf(d2());
-}
-
-float Option::P()
-{
-    return -S0 * exp(-Q * T) * sncdf.cdf(-d1()) + KPV() * sncdf.cdf(-d2());
-}
-
-float Option::KPV()
-{
-    return K * exp(-r * T);
-}
 
 Option::Option(float s0, float k, float t, float rr, float sma, float q)
 {
@@ -38,6 +13,49 @@ Option::Option(float s0, float k, float t, float rr, float sma, float q)
     T = t;
     Q = q;
 }
+
+float Option::grealT(){
+    if (simTime < T){
+        return T - simTime;
+    }
+    return 0;
+};
+
+void Option::setSimTime(const float t){
+    simTime = t;
+};
+
+float Option::d1()
+{
+    float T = grealT();
+    return (log(S0 / K) + (r - Q + pow(sigma, 2) / 2) * T) / (sigma * sqrt(T));
+}
+
+float Option::d2()
+{
+    float T = grealT();
+    return d1() - sigma * sqrt(T);
+}
+
+float Option::C()
+{
+    float T = grealT();
+    return S0 * exp(-Q * T) * sncdf.cdf(d1()) - KPV() * sncdf.cdf(d2());
+}
+
+float Option::P()
+{
+    float T = grealT();
+    return -S0 * exp(-Q * T) * sncdf.cdf(-d1()) + KPV() * sncdf.cdf(-d2());
+}
+
+float Option::KPV()
+{
+    float T = grealT();
+    return K * exp(-r * T);
+}
+
+
 
 float Option::deltaC()
 {
@@ -56,16 +74,19 @@ float Option::np(float x)
 
 float Option::gamma()
 {
+    float T = grealT();
     return np(d1()) / (S0 * sigma * sqrt(T));
 }
 
 float Option::thetaP(bool trading_days)
 {
+    float T = grealT();
     return thetaC(trading_days) + r * K * exp(-r * T);
 }
 
 float Option::thetaC(bool trading_days)
 {
+    float T = grealT();
     float theta = -(S0 * np(d1()) * sigma / (2 * sqrt(T))) - r * K * exp(-r * T) * sncdf.cdf(d2());
 
     if (trading_days)
@@ -77,16 +98,19 @@ float Option::thetaC(bool trading_days)
 
 float Option::vega()
 {
+    float T = grealT();
     return S0 * sqrt(T) * np(d1());
 }
 
 float Option::rhoC()
 {
+    float T = grealT();
     return K * T * exp(-r * T) * sncdf.cdf(d2());
 }
 
 float Option::rhoP()
 {
+    float T = grealT();
     return K * T * exp(-r * T) * sncdf.cdf(-d2());
 }
 
@@ -110,10 +134,12 @@ float Option::diffPriceP(float pp, float s)
 
 ostream &operator<<(ostream &os, Option &s)
 {
-    os << s.T << "," << s.S0 << ","
+    os << s.getSimTime() << "," << s.S0 << ","
        << s.C() << "," << s.deltaC() << "," << s.thetaC(true) << "," << s.rhoC() << ","
        << s.P() << "," << s.deltaP() << "," << s.thetaP(true) << "," << s.rhoP() << ","
        << s.gamma()  << "," << s.vega();
     return os;
 };
+
+
 

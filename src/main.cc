@@ -9,6 +9,7 @@
 #include "filter_coeffs.h"
 #include "filters.h"
 #include "examples/ex_frac_dev.h"
+#include "examples/ex_option.h"
 
 using namespace std;
 
@@ -51,6 +52,6 @@ int test_iema(){
 
 
 int main(){
-    test_iema();
+    ex_sim_option();
     return 0;
 }

@@ -10,6 +10,7 @@
 #include "aux.h"
 #include "iv.h"
 #include "ex_option.h"
+#include "opt_sim.h"
 
 
 using namespace std;
@@ -21,7 +22,7 @@ int ex_option_0()
 
     Option option(49.0, 50.0, .3846, 0.05, .2, 0.0);
 
-    cout << option.gT() << "," << option.gS0() << "," << option.C() << ","
+    cout << option.gexT() << "," << option.gS0() << "," << option.C() << ","
     << option.deltaC() << "," << option.gamma() << "," << option.thetaC(true) << endl;
 
     return 0;
@@ -76,27 +77,15 @@ int ex_option()
     cout << uu << endl;
     cout << un << endl;
     cout << un[0] << endl;
+    return 0;
+};
 
-    Sin price_t(49.0, 5, 1.0, 252);
-    fstream fout;
-    fout.open("datos.csv", ios::out);
-    fout << option_csv_header() << endl;
-
-    for (size_t i = 0; i < price_t.getLength(); i++)
-    {
-        float tt = (float)i / 252.0;
-        float ttm = 1.0 - tt;
-        if (ttm > 0)
-        {
-            Option option(price_t[i], 50.0, ttm, 0.05, .2, 0.03);
-            fout << option << endl;
-        }
-        else
-        {
-            break;
-        }
-    }
-    fout.close();
+int ex_sim_option(){
+    size_t length = 252;
+    Sin price_t(49.0, 0, 1.0, length);
+    Option option(49, 50.0, 1.0, 0.05, .2, 0.03);
+    Simulator sim(&option, &price_t);
+    sim.run("datos.csv");
     return 0;
 }
 
