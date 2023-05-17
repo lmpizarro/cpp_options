@@ -4,13 +4,13 @@
 #include <vector>
 #include <string>
 #include <cmath>
-#include "option.h"
 #include "hedge.h"
 #include "signals.h"
 #include "aux.h"
 #include "iv.h"
 #include "ex_option.h"
 #include "opt_sim.h"
+#include "bsm.h"
 
 
 using namespace std;
@@ -20,7 +20,7 @@ using namespace std;
 int ex_option_0()
 {
 
-    Option<float> option(49.0, 50.0, .3846, 0.05, .2, 0.0);
+    BSM<float> option(49.0, 50.0, .3846, 0.05, .2, 0.0);
 
     cout << option.gexT() << "," << option.gS0() << "," << option.C() << ","
     << option.deltaC() << "," << option.gamma() << "," << option.thetaC(true) << endl;
@@ -33,7 +33,7 @@ int ex_option()
     Hedge hedge(.3, ONE_DAY, .04, .06);
     NormalCDF<float> ncdf(0.0, 1.0);
     StandardNormalCDF<float> sncdf;
-    Option<float> option(49.0, 50.0, .3846, 0.05, .2, 0.0);
+    BSM<float> option(49.0, 50.0, .3846, 0.05, .2, 0.0);
 
     cout << "d " << hedge.d() << endl;
     cout << "u " << hedge.u() << endl;
@@ -41,10 +41,6 @@ int ex_option()
     cout << "pp " << hedge.pp() << endl;
     cout << "ncdf " << ncdf.cdf(-0.0) << endl;
     cout << "sncdf " << sncdf.cdf(-0.0) << endl;
-    cout << "d1 " << option.d1() << endl;
-    cout << "d2 " << option.d2() << endl;
-    cout << "N d1 " << sncdf.cdf(option.d1()) << endl;
-    cout << "N d2 " << sncdf.cdf(option.d1()) << endl;
     cout << "Call " << option.C() << endl;
     cout << "Put " << option.P() << endl;
     cout << "delta Put " << option.deltaP() << endl;
@@ -83,7 +79,7 @@ int ex_option()
 int ex_sim_option(){
     size_t length = 252;
     Sin price_t(49.0, 0, 1.0, length);
-    Option<float> option(49, 50.0, 1.0, 0.05, .2, 0.03);
+    BSM<float> option(49, 50.0, 1.0, 0.05, .2, 0.03);
     Simulator sim(&option, &price_t);
     sim.run("datos.csv");
     return 0;

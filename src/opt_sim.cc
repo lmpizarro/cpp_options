@@ -1,4 +1,4 @@
-#include "option.h"
+#include "bsm.h"
 #include "signals.h"
 #include "opt_sim.h"
 #include <fstream>
@@ -8,7 +8,7 @@
 using namespace std;
 
 
-Simulator::Simulator(Option<float> * opt, Signal * sig){
+Simulator::Simulator(BSM<float> * opt, Signal * sig){
     option = opt;
     S = sig;
 };
@@ -22,7 +22,7 @@ void Simulator::run(string filename){
     for (size_t i = 0; i < S->getLength(); i++)
     {
         float tt = (float)i / S->getLength();
-        Option<float> calc_option(S->data[i], option->gK(), option->gexT(),
+        BSM<float> calc_option(S->data[i], option->gK(), option->gexT(),
         option->gR(), option->gSigma(), option->gQ());
         calc_option.setSimTime(tt);
         fout << calc_option << endl;

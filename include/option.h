@@ -7,44 +7,39 @@
 using namespace std;
 
 const float ONE_DAY = 1.0 / 365.0;
-template <typename Type> class Option
+template <typename Type>
+class Option
 {
-private:
+public:
     Type S0, K, r, sigma, T, Q;
     Type simTime = 0;
-    StandardNormalCDF<Type> sncdf;
-    Type np(Type x);
-    Type KPV();
-    Type grealT();
+    Type grealT()const;
 
-public:
     Option(Type S0, Type K, Type T, Type r, Type sigma, Type Q);
-    Type d1();
-    Type d2();
-    Type C();
-    Type P();
-    Type deltaC();
-    Type deltaP();
-    Type thetaC(bool);
-    Type thetaP(bool);
-    Type rhoC();
-    Type rhoP();
-    Type vega();
-    Type gamma();
+    virtual Type C(){ return 0; };
+    virtual Type P(){ return 0; };
+    virtual Type deltaC(){ return 0; };
+    virtual Type deltaP(){ return 0; };
+    virtual Type thetaC(bool) { return 0; };
+    virtual Type thetaP(bool) { return 0; };
+    virtual Type rhoC() { return 0; };
+    virtual Type rhoP() { return 0; };
+    virtual Type vega() { return 0; };
+    virtual Type gamma() { return 0; };
     void setIV(Type);
-    Type gS0() { return S0; };
-    Type gK(){return K;};
-    Type gexT() { return T; }
-    Type gSigma() { return sigma; }
-    Type gQ() { return Q; }
-    Type gR() { return r; }
+    Type gS0()const{ return S0; };
+    Type gK()const{ return K; };
+    Type gexT()const{ return T; }
+    Type gSigma()const{ return sigma; }
+    Type gQ()const{ return Q; }
+    Type gR()const{ return r; }
     friend ostream &operator<<(std::ostream &os, Option &s);
 
     Type diffPriceC(Type, Type);
     Type diffPriceP(Type, Type);
 
     void setSimTime(const Type);
-    Type getSimTime() { return simTime; };
+    Type getSimTime()const{ return simTime; };
 };
 
 
