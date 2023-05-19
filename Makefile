@@ -14,16 +14,17 @@
 #
 
 CXX      := clang++
-CXXFLAGS := -pedantic-errors -Wall -Wextra -Werror
-LDFLAGS  := -L/usr/lib -lstdc++ -lm -lomp
+CXXFLAGS := -pedantic-errors -Wall -Wextra -Werror -std=c++17
+LDFLAGS  := -L/usr/lib -lstdc++ -lm -lomp -lcpr
 BUILD    := ./build
 OBJ_DIR  := $(BUILD)/objects
 APP_DIR  := $(BUILD)/apps
 TARGET   := main
-INCLUDE  := -Iinclude/ -Iinclude/examples
+INCLUDE  := -Iinclude/ -Iinclude/examples -Iinclude/rofex
 SRC      :=                      \
    $(wildcard src/*.cc)         \
    $(wildcard src/examples/*.cc)         \
+   $(wildcard src/rofex/*.cc)         \
 
 OBJECTS  := $(SRC:%.cc=$(OBJ_DIR)/%.o)
 DEPENDENCIES \
