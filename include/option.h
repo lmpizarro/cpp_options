@@ -33,7 +33,7 @@ public:
     Type gSigma()const{ return sigma; }
     Type gQ()const{ return Q; }
     Type gR()const{ return r; }
-    friend ostream &operator<<(std::ostream &os, Option &s);
+    friend ostream &operator<<(std::ostream &os, Option<float> &s);
 
     Type diffPriceC(Type, Type);
     Type diffPriceP(Type, Type);

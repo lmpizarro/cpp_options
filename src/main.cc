@@ -10,6 +10,8 @@
 #include "filters.h"
 #include "examples/ex_frac_dev.h"
 #include "examples/ex_option.h"
+#include "rofex/test_rofex.h"
+
 
 using namespace std;
 
@@ -52,6 +54,7 @@ int test_iema(){
 
 
 int main(){
-    ex_sim_option();
+    //ex_sim_option();
+    test_token();
     return 0;
 }
