@@ -1,0 +1,12 @@
+{
+    "C_Cpp.default.compilerPath": "/usr/bin/g++",
+    "C_Cpp.default.includePath": [
+        "cpp_options/include", "cpp_options/src/examples"
+    ],
+    "C_Cpp.errorSquiggles": "disabled",
+    "files.associations": {
+        "random": "cpp",
+        "*.tcc": "cpp",
+        "*.cc": "cpp"
+    }
+}
