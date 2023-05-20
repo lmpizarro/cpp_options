@@ -1,6 +1,5 @@
 #include "property.h"
 
-
 template <typename Name, typename Type>
 Type Property<Name, Type>::
 operator()() const

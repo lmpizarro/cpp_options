@@ -56,7 +56,7 @@ int test_iema(){
 }
 
 int test_prop(){
-    Property<> b("hj", 2);
+    Property<> b;
     cout << b() << endl;
     return 1;
 }

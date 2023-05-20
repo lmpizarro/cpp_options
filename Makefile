@@ -20,11 +20,12 @@ BUILD    := ./build
 OBJ_DIR  := $(BUILD)/objects
 APP_DIR  := $(BUILD)/apps
 TARGET   := main
-INCLUDE  := -Iinclude/ -Iinclude/examples -Iinclude/rofex
+INCLUDE  := -Iinclude/ -Iinclude/examples -Iinclude/rofex -Isrc/finance_book/include
 SRC      :=                      \
    $(wildcard src/*.cc)         \
    $(wildcard src/examples/*.cc)         \
    $(wildcard src/rofex/*.cc)         \
+   $(wildcard src/finance_book/src/*.cc)         \
 
 OBJECTS  := $(SRC:%.cc=$(OBJ_DIR)/%.o)
 DEPENDENCIES \
