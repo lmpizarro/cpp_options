@@ -19,11 +19,11 @@ template <typename Type> Type Option<Type>::grealT()const{
         return T - simTime;
     }
     return 0;
-};
+}
 
 template <typename Type> void Option<Type>::setSimTime(const Type t){
     simTime = t;
-};
+}
 
 template <typename Type> void Option<Type>::setIV(Type sma)
 {
@@ -50,7 +50,7 @@ ostream &operator<<(ostream &os, Option<float> &s)
        << s.P() << "," << s.deltaP() << "," << s.thetaP(true) << "," << s.rhoP() << ","
        << s.gamma()  << "," << s.vega();
     return os;
-};
+}
 
 /*
 https://bytefreaks.net/programming-2/c/c-undefined-reference-to-templated-class-function

@@ -18,11 +18,11 @@ private:
     vector<string> cred;
     string user, password;
     void read_credentials();
-
-public:
-    Token(){read_credentials();}
     string getUser() { return user; };
     string getPassword() { return password; };
+
+public:
+    Token() { read_credentials(); }
     string getToken();
 };
 

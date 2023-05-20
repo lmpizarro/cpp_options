@@ -7,7 +7,7 @@ using namespace std;
 
 template <typename T2> BSM<T2>::BSM(T2 s0, T2 k, T2 t, T2 rr, T2 sma, T2 q):Option<T2>(s0,k,t,rr,sma,q)
 {
-};
+}
 
 template <typename T2> T2 BSM<T2>::d1()
 {

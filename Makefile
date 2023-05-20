@@ -15,7 +15,7 @@
 
 CXX      := clang++
 CXXFLAGS := -pedantic-errors -Wall -Wextra -Werror -std=c++17
-LDFLAGS  := -L/usr/lib -lstdc++ -lm -lomp -L/usr/local/lib -lcpr
+LDFLAGS  := -L/usr/lib -lstdc++ -lm  -lomp -L/usr/local/lib -lcpr
 BUILD    := ./build
 OBJ_DIR  := $(BUILD)/objects
 APP_DIR  := $(BUILD)/apps

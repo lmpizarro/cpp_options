@@ -30,14 +30,14 @@ FractionalDerivative::FractionalDerivative(const float ord) : FirCoeffs(GRUNWALD
         factorial *= k;
         coefficients[k] = pow(-1, k) * std::tgamma(alfa + 1) / std::tgamma(alfa - k + 1) / factorial;
     }
-};
+}
 
 WMA4::WMA4():FirCoeffs(4){
     coefficients[0]  = 4.0/10.0;
     coefficients[1]  = 3.0/10.0;
     coefficients[2]  = 2.0/10.0;
     coefficients[3]  = 1.0/10.0;
-};
+}
 
 ostream &operator<<(ostream &os, FirCoeffs &s)
 {
@@ -48,7 +48,7 @@ ostream &operator<<(ostream &os, FirCoeffs &s)
     }
     os << "]" << endl;
     return os;
-};
+}
 
 float &FirCoeffs::operator[](size_t i)
 {

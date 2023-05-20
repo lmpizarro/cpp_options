@@ -11,7 +11,7 @@ using namespace std;
 Simulator::Simulator(BSM<float> * opt, Signal * sig){
     option = opt;
     S = sig;
-};
+}
 
 
 void Simulator::run(string filename){
@@ -28,4 +28,4 @@ void Simulator::run(string filename){
         fout << calc_option << endl;
     }
     fout.close();
-};
+}

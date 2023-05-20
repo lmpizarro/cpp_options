@@ -74,7 +74,7 @@ int ex_option()
     cout << un << endl;
     cout << un[0] << endl;
     return 0;
-};
+}
 
 int ex_sim_option(){
     size_t length = 252;

@@ -15,7 +15,7 @@ template <typename Type> Type NormalCDF<Type>::cdf(Type x)
     value = (x - loc) / (scale * sqrt(2));
 
     return 0.5 * (1 + erf(value));
-};
+}
 
 template <typename Type> StandardNormalCDF<Type>::StandardNormalCDF(void) : NormalCDF<Type>(0, 1) {}
 

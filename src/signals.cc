@@ -90,7 +90,7 @@ Uniform::Uniform(const float lo, const float up, const size_t s) : Signal(0, s)
     {
         data[i] += distribution(generator);
     }
-};
+}
 
 
 GBM::GBM(const float S0, const float mu, const float vol, const float T, const size_t length): Signal(0,length){
@@ -109,7 +109,7 @@ GBM::GBM(const float S0, const float mu, const float vol, const float T, const s
         price = price * std::exp(driftTerm + volatilityTerm);
         data[i] = price;
     }
-};
+}
 
 ostream &operator<<(ostream &os, Signal &s)
 {
@@ -120,4 +120,4 @@ ostream &operator<<(ostream &os, Signal &s)
     }
     os << "]" << endl;
     return os;
-};
+}

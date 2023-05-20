@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void Filter::run(){};
+void Filter::run(){}
 
 FirFilter::FirFilter(FirCoeffs *coeffs, Signal *inp, Signal *out)
 {
@@ -50,13 +50,13 @@ EMA::EMA(float a, Signal *inp, Signal *out)
     input = inp;
     output = out;
     alfa = a;
-};
+}
 
 EMA::EMA(Signal *inp, Signal *out)
 {
     input = inp;
     output = out;
-};
+}
 
 void EMA::run()
 {
@@ -65,11 +65,11 @@ void EMA::run()
     {
         output->data[i] = (1 - alfa) * output->data[i - 1] + alfa * input->getPosition(i);
     }
-};
+}
 
-IEMA::IEMA(float a, Signal *inp, Signal *out) : EMA(a, inp, out){};
+IEMA::IEMA(float a, Signal *inp, Signal *out) : EMA(a, inp, out){}
 
-IEMA::IEMA(Signal *inp, Signal *out) : EMA(inp, out){};
+IEMA::IEMA(Signal *inp, Signal *out) : EMA(inp, out){}
 
 void IEMA::run()
 {
@@ -77,4 +77,4 @@ void IEMA::run()
     for (size_t i =0; i < output->getLength(); i++){
         output->data[i] = input->data[i] - output->data[i];
     }
-};
+}

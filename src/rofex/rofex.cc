@@ -47,7 +47,7 @@ string Token::getToken()
     };
 
     return token;
-};
+}
 
 
 
