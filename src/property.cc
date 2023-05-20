@@ -1,7 +1,6 @@
 #include "property.h"
 
 
-
 template <typename Name, typename Type>
 Type Property<Name, Type>::
 operator()() const
@@ -61,6 +60,15 @@ void Property<Name, Type>::
 {
     nam = new_name;
 }
+
+template <typename Name, typename Type>
+Property<Name, Type> & Property<Name, Type>::operator = (const Property<Name, Type>& source)
+{
+    nam = source.nam;
+    con = source.con;
+    return *this;
+}
+
 
 
 template class Property<string, float>;

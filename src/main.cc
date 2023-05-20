@@ -11,6 +11,7 @@
 #include "examples/ex_frac_dev.h"
 #include "examples/ex_option.h"
 #include "rofex/test_rofex.h"
+#include "property.h"
 
 
 using namespace std;
@@ -54,9 +55,15 @@ int test_iema(){
     return 0;
 }
 
+int test_prop(){
+    Property<> b("hj", 2);
+    cout << b() << endl;
+    return 1;
+}
 
 int main(){
     //ex_sim_option();
     test_token();
+    test_prop();
     return 0;
 }

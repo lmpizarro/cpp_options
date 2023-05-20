@@ -16,6 +16,7 @@ class Property
 private:
     Name nam;
     Type con;
+    Property<Name, Type>& operator = (const Property<Name, Type>& source);
 
 public:
     Property(const Name n, const Type c);
