@@ -138,12 +138,12 @@ void Heston::update_zv_zs(){
     std::mt19937 gen(rd());
     std::normal_distribution<double> distribution(0.0, 1.0);
 
-    std::default_random_engine de(time(0)); //seed
-    std::normal_distribution<double> nd(0.0, 1.0); //mean followed by stdiv
+    // std::default_random_engine de(time(0)); //seed
+    // std::normal_distribution<double> nd(0.0, 1.0); //mean followed by stdiv
 
     for (size_t i=0; i < length; ++i){
-        zv[i] = nd(de);
-        zs[i] = rho * zv[i] + sqrt(1- pow(rho, 2))*nd(de);
+        zv[i] = distribution(rd);
+        zs[i] = rho * zv[i] + sqrt(1- pow(rho, 2))*distribution(rd);
     }
 }
 
