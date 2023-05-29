@@ -66,7 +66,7 @@ public:
 class GBM : public Signal
 {
 public:
-    GBM(const float S0, const float mu, const float vol, const float T, const size_t size);
+    GBM(const float S0, const float mu, const float vol, const float dt, const size_t size);
 };
 
 class Heston : public Signal
