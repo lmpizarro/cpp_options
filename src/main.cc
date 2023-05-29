@@ -53,5 +53,8 @@ int test_iema(){
 
 int main(){
     ex_sim_option();
+    Heston hst;
+    hst.generate(.3, 100, 1.0/252.0);
+    cout << hst << endl;
     return 0;
 }

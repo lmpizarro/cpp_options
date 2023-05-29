@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cmath>
 #include <random>
+#include <algorithm>    // std::max
 
 using namespace std;
 
@@ -45,11 +46,14 @@ float &Signal::operator[](size_t i)
     return data[i];
 }
 
-
-float Signal::getPosition(size_t pos){
-    if (pos < getLength()){
+float Signal::getPosition(size_t pos)
+{
+    if (pos < getLength())
+    {
         return data[pos];
-    } else {
+    }
+    else
+    {
         return 0;
     }
 }
@@ -92,8 +96,8 @@ Uniform::Uniform(const float lo, const float up, const size_t s) : Signal(0, s)
     }
 };
 
-
-GBM::GBM(const float S0, const float mu, const float vol, const float T, const size_t length): Signal(0,length){
+GBM::GBM(const float S0, const float mu, const float vol, const float T, const size_t length) : Signal(0, length)
+{
     std::random_device rd;
     std::mt19937 gen(rd());
     std::normal_distribution<double> distribution(0.0, 1.0);
@@ -101,7 +105,8 @@ GBM::GBM(const float S0, const float mu, const float vol, const float T, const s
     float dt = T / length;
     float price = S0;
 
-    for (size_t i = 0; i < length; ++i) {
+    for (size_t i = 0; i < length; ++i)
+    {
         float epsilon = distribution(gen);
         float driftTerm = mu * price * dt;
         float volatilityTerm = vol * price * std::sqrt(dt) * epsilon;
@@ -109,7 +114,58 @@ GBM::GBM(const float S0, const float mu, const float vol, const float T, const s
         price = price * std::exp(driftTerm + volatilityTerm);
         data[i] = price;
     }
-};
+}
+Heston::Heston() : Heston(.8, 21, .1, .3, .09, 21)
+{
+}
+
+Heston::Heston(const float rh, const float kapp, const float thet,
+               const float sgm, const float rr, const size_t N) : Signal(0, N)
+{
+    rho = rh;
+    kappa = kapp;
+    theta = thet;
+    sigma = sgm;
+    r = rr; // risk neutral meassure
+    length = N;
+
+    zv = std::make_unique<double[]>(length);
+    zs = std::make_unique<double[]>(length);
+    update_zv_zs();
+}
+
+void Heston::update_zv_zs(){
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::normal_distribution<double> distribution(0.0, 1.0);
+
+    std::default_random_engine de(time(0)); //seed
+    std::normal_distribution<double> nd(0.0, 1.0); //mean followed by stdiv
+
+    for (size_t i=0; i < length; ++i){
+        zv[i] = nd(de);
+        zs[i] = rho * zv[i] + sqrt(1- pow(rho, 2))*nd(de);
+    }
+}
+
+void Heston::generate(const double v0, const double s0, const double dt)
+{
+    double v1;
+    double vi = v0;
+    update_zv_zs();
+    data[0] = s0;
+    for (size_t i = 1; i < length; i++)
+    {
+        v1 = vi + kappa * (theta - vi)*dt + sigma * std::sqrt(vi * dt) * zv[i] + .25 * std::pow(sigma, 2.0) * dt * (std::pow(zv[i], 2.0) - 1.0);
+
+        vi = std::max(0.0, (double)v1);
+        data[i] = data[i-1] * (1 + r * dt + std::sqrt(vi * dt) * zs[i]) + .25 * std::pow(data[i-1],2)*dt*(std::pow(zs[i-1],2) -1);
+
+        // cout << i << " " << vi  << " " << data[i] << endl;
+    }
+    // cout << "v0 " << v0 << " s0 " << s0 << " dt " << dt << endl;
+    // cout << "rho " << rho << " kappa " << kappa << " theta " << theta << " sigma " << sigma << " rr " << r << endl;
+}
 
 ostream &operator<<(ostream &os, Signal &s)
 {
