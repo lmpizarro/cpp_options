@@ -3,8 +3,6 @@
 #include "signals.h"
 #include "option.h"
 
-using namespace std;
-
 class Simulator
 {
 private:
@@ -13,7 +11,7 @@ private:
 
 public:
     Simulator(Option *opt, Signal * signal);
-    void run(string);
+    void run(std::string);
 };
 
 #endif

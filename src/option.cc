@@ -2,7 +2,6 @@
 #include <iostream>
 #include "option.h"
 
-using namespace std;
 
 Option::Option(float s0, float k, float t, float rr, float sma, float q)
 {
@@ -132,7 +131,7 @@ float Option::diffPriceP(float pp, float s)
 }
 
 
-ostream &operator<<(ostream &os, Option &s)
+std::ostream &operator<<(std::ostream &os, Option &s)
 {
     os << s.getSimTime() << "," << s.S0 << ","
        << s.C() << "," << s.deltaC() << "," << s.thetaC(true) << "," << s.rhoC() << ","

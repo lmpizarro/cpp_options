@@ -6,8 +6,6 @@
 
 #include "signals.h"
 
-using namespace std;
-
 const int GRUNWALD_LETNIKOV_COEFS = 10;
 
 class FirCoeffs

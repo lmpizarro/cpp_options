@@ -4,8 +4,6 @@
 #include <iostream>
 #include "cdf.h"
 
-using namespace std;
-
 const float ONE_DAY = 1.0 / 365.0;
 class Option
 {
@@ -42,7 +40,7 @@ public:
     float diffPriceP(float, float);
 
 
-    friend ostream &operator<<(std::ostream &os, Option &s);
+    friend std::ostream &operator<<(std::ostream &os, Option &s);
 
     void setSimTime(const float);
     float getSimTime() { return simTime; };

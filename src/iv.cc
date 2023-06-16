@@ -13,7 +13,7 @@ float ImpliedVolatility::bisection(float p, float s1, float s2)
 {
     if (option->diffPriceC(p, s1) * option->diffPriceC(p, s2) >= 0)
     {
-        cout << "You have not assumed right a and b\n";
+        std::cout << "You have not assumed right a and b\n";
         return 0;
     }
 
@@ -40,7 +40,7 @@ float ImpliedVolatility::regulaFalsi(float p, float s1, float s2)
 {
     if (option->diffPriceC(p, s1) * option->diffPriceC(p, s2) >= 0)
     {
-        cout << "You have not assumed right a and b\n";
+        std::cout << "You have not assumed right a and b\n";
         return 0;
     }
 

@@ -6,8 +6,6 @@
 #include <iostream>
 
 
-using std::string;
-
-string option_csv_header();
+std::string option_csv_header();
 
 #endif

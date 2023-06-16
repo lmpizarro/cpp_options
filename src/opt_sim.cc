@@ -5,8 +5,6 @@
 #include <iostream>
 #include "aux.h"
 
-using namespace std;
-
 
 Simulator::Simulator(Option * opt, Signal * sig){
     option = opt;

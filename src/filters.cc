@@ -2,8 +2,6 @@
 #include <iostream>
 #include <fstream>
 
-using namespace std;
-
 void Filter::run(){};
 
 FirFilter::FirFilter(FirCoeffs *coeffs, Signal *inp, Signal *out)

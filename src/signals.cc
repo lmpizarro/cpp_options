@@ -4,7 +4,6 @@
 #include <random>
 #include <algorithm>    // std::max
 
-using namespace std;
 
 Signal::Signal(const float a, const size_t s)
 {

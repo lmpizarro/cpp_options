@@ -1,8 +1,6 @@
 #include <cmath>
 #include "cdf.h"
 
-using namespace std;
-
 NormalCDF::NormalCDF(float l, float s)
 {
     loc = l;

@@ -11,8 +11,6 @@
 #include "examples/ex_frac_dev.h"
 #include "examples/ex_option.h"
 
-using namespace std;
-
 
 int test_wma(){
     WMA4 wma;
