@@ -7,7 +7,6 @@
 #include "filters.h"
 #include "ex_frac_dev.h"
 
-using namespace std;
 
 int ex_fracdev()
 {
@@ -20,8 +19,8 @@ int ex_fracdev()
     FirFilter firfilter(&fracDev,&inp, &out);
     firfilter.run();
 
-    cout << fracDev << endl;
-    cout << out << endl;
+    std::cout << fracDev << endl;
+    std::cout << out << endl;
     firfilter.csvResult("filter_out.csv");
 
     return 0;
