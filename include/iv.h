@@ -5,9 +5,9 @@
 
 class ImpliedVolatility{
     private:
-        Option *option;
+        BSM *option;
     public:
-        ImpliedVolatility(Option *);
+        ImpliedVolatility(BSM *);
 
         float bisection(float, float, float);
         float regulaFalsi(float, float, float);

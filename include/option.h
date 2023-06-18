@@ -5,46 +5,74 @@
 #include "cdf.h"
 
 const float ONE_DAY = 1.0 / 365.0;
+
 class Option
 {
-private:
+public:
+    float gS0() const { return S0; };
+    float gK() const { return K; };
+    float gexT() const { return T; }
+    float gSigma() const { return sigma; }
+    float gQ() const { return Q; }
+    float gR() const { return r; }
+
+    virtual float C() const = 0;
+    virtual float P() const = 0;
+    virtual float deltaC() const = 0;
+    virtual float deltaP() const = 0;
+    virtual float thetaC(bool) const = 0;
+    virtual float thetaP(bool)  const = 0;
+    virtual float rhoC() const = 0;
+    virtual float rhoP() const = 0;
+    virtual float vega() const = 0;
+    virtual float gamma() const = 0;
+
+    friend std::ostream &operator<<(std::ostream &os, const Option &s);
+
+    virtual void print(std::ostream &o) const = 0;
+protected:
     float S0, K, r, sigma, T, Q;
+};
+
+inline std::ostream &operator<<(std::ostream &os, const Option &option)
+{
+    option.print(os);
+    return os;
+}
+
+
+
+class BSM : public Option
+{
+private:
     float simTime = 0;
     StandardNormalCDF sncdf;
-    float np(float x);
-    float KPV();
-    float grealT();
+    float np(float x) const;
+    float KPV() const;
+    float grealT() const;
 
 public:
-    Option(float S0, float K, float T, float r, float sigma, float Q);
-    float d1();
-    float d2();
-    float C();
-    float P();
-    float deltaC();
-    float deltaP();
-    float thetaC(bool);
-    float thetaP(bool);
-    float rhoC();
-    float rhoP();
-    float vega();
-    float gamma();
+    BSM(float S0, float K, float T, float r, float sigma, float Q);
+    float d1() const;
+    float d2() const;
+    float C() const;
+    float P() const;
+    float deltaC() const;
+    float deltaP() const ;
+    float thetaC(bool) const;
+    float thetaP(bool) const;
+    float rhoC() const;
+    float rhoP() const ;
+    float vega() const;
+    float gamma() const;
     void setIV(float);
-    float gS0() { return S0; };
-    float gK(){return K;};
-    float gexT() { return T; }
-    float gSigma() { return sigma; }
-    float gQ() { return Q; }
-    float gR() { return r; }
     float diffPriceC(float, float);
     float diffPriceP(float, float);
 
-
-    friend std::ostream &operator<<(std::ostream &os, Option &s);
-
     void setSimTime(const float);
-    float getSimTime() { return simTime; };
-};
+    float getSimTime() const { return simTime; };
 
+    void print(std::ostream &o) const;
+};
 
 #endif

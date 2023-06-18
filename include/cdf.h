@@ -6,14 +6,14 @@ class NormalCDF
 public:
     float loc;
     float scale;
-    NormalCDF(float, float);
-    float cdf(float x);
+    NormalCDF(const float, const float);
+    float cdf(const float x) const;
 };
 
 class StandardNormalCDF : public NormalCDF
 {
 public:
     explicit StandardNormalCDF(void);
-    float cdf(float x);
+    float cdf(const float x) const;
 };
 #endif

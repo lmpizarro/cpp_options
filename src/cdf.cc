@@ -1,13 +1,13 @@
 #include <cmath>
 #include "cdf.h"
 
-NormalCDF::NormalCDF(float l, float s)
+NormalCDF::NormalCDF(const float l, const float s)
 {
     loc = l;
     scale = s;
 }
 
-float NormalCDF::cdf(float x)
+float NormalCDF::cdf(const float x) const
 {
     float value;
     value = (x - loc) / (scale * sqrt(2));
@@ -17,7 +17,7 @@ float NormalCDF::cdf(float x)
 
 StandardNormalCDF::StandardNormalCDF(void) : NormalCDF(0, 1) {}
 
-float StandardNormalCDF::cdf(float x)
+float StandardNormalCDF::cdf(const float x) const
 {
     return NormalCDF::cdf(x);
 }

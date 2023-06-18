@@ -6,11 +6,11 @@
 class Simulator
 {
 private:
-    Option *option;
+    BSM *option;
     Signal *S;
 
 public:
-    Simulator(Option *opt, Signal * signal);
+    Simulator(BSM *opt, Signal * signal);
     void run(std::string);
 };
 
