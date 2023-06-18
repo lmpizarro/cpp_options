@@ -13,7 +13,7 @@ FirFilter::FirFilter(FirCoeffs *coeffs, Signal *inp, Signal *out)
 
 void FirFilter::run()
 {
-    for (size_t i = 2; i < input->getLength(); i++)
+    for (size_t i = 2; i < input->length(); i++)
     {
         float result = 0.0;
         for (size_t j = 0; j < coefficients->getLength(); j++)
@@ -33,7 +33,7 @@ void Filter::csvResult(const std::string filename)
     std::fstream fout;
     fout.open(filename, std::ios::out);
     std::string out_str = "t,inp,out\n";
-    for (size_t i = 0; i < getOutput()->getLength(); i++)
+    for (size_t i = 0; i < getOutput()->length(); i++)
     {
         float inp__ = getInput()->getPosition(i);
         float out__ = getOutput()->getPosition(i);
@@ -59,7 +59,7 @@ EMA::EMA(Signal *inp, Signal *out)
 void EMA::run()
 {
     output->data[0] = 0;
-    for (size_t i = 1; i < input->getLength(); i++)
+    for (size_t i = 1; i < input->length(); i++)
     {
         output->data[i] = (1 - alfa) * output->data[i - 1] + alfa * input->getPosition(i);
     }
@@ -72,7 +72,7 @@ IEMA::IEMA(Signal *inp, Signal *out) : EMA(inp, out){};
 void IEMA::run()
 {
     EMA::run();
-    for (size_t i =0; i < output->getLength(); i++){
+    for (size_t i =0; i < output->length(); i++){
         output->data[i] = input->data[i] - output->data[i];
     }
 };

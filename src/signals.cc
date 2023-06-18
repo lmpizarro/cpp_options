@@ -7,9 +7,9 @@
 
 Signal::Signal(const float a, const size_t s)
 {
-    length = s;
-    data = std::make_unique<float[]>(length);
-    for (size_t i = 0; i < length; i++)
+    _length = s;
+    data = std::make_unique<float[]>(_length);
+    for (size_t i = 0; i < _length; i++)
     {
         data[i] = a;
     }
@@ -17,9 +17,9 @@ Signal::Signal(const float a, const size_t s)
 
 Signal::Signal(const Signal &s)
 {
-    length = s.length;
-    data = std::make_unique<float[]>(length);
-    for (size_t i = 0; i < length; i++)
+    _length = s._length;
+    data = std::make_unique<float[]>(_length);
+    for (size_t i = 0; i < _length; i++)
     {
         data[i] = s.data[i];
     }
@@ -28,7 +28,7 @@ Signal::Signal(const Signal &s)
 Signal Signal::operator+(const Signal &s)
 {
     Signal sum(s);
-    for (size_t i = 0; i < s.length; i++)
+    for (size_t i = 0; i < s._length; i++)
     {
         sum.data[i] = this->data[i] + s.data[i];
     }
@@ -37,9 +37,9 @@ Signal Signal::operator+(const Signal &s)
 
 float &Signal::operator[](size_t i)
 {
-    if (i >= length)
+    if (i >= _length || i < 0)
     {
-        std::cout << "Index out of bounds " << length << std::endl;
+        std::cout << "Index out of bounds " << _length << std::endl;
         return data[0];
     }
     return data[i];
@@ -47,7 +47,7 @@ float &Signal::operator[](size_t i)
 
 float Signal::getPosition(size_t pos)
 {
-    if (pos < getLength())
+    if (pos < length())
     {
         return data[pos];
     }
@@ -60,7 +60,7 @@ float Signal::getPosition(size_t pos)
 Uniform Uniform::operator+(const Uniform &s)
 {
     Uniform sum(s);
-    for (size_t i = 0; i < s.length; i++)
+    for (size_t i = 0; i < s._length; i++)
     {
         sum.data[i] = this->data[i] + s.data[i];
     }
@@ -69,9 +69,9 @@ Uniform Uniform::operator+(const Uniform &s)
 
 Sin::Sin(const float cc, const float amp, const float cycles, const size_t s) : Signal(cc, s)
 {
-    for (size_t i = 0; i < length; i++)
+    for (size_t i = 0; i < _length; i++)
     {
-        data[i] += amp * sin(2 * M_PI * cycles * i / length);
+        data[i] += amp * sin(2 * M_PI * cycles * i / _length);
     }
 }
 
@@ -79,7 +79,7 @@ Normal::Normal(const float lo, const float sc, const size_t s) : Signal(0, s)
 {
     std::default_random_engine generator;
     std::normal_distribution<float> distribution(lo, sc);
-    for (size_t i = 0; i < length; i++)
+    for (size_t i = 0; i < _length; i++)
     {
         data[i] += distribution(generator);
     }
@@ -89,7 +89,7 @@ Uniform::Uniform(const float lo, const float up, const size_t s) : Signal(0, s)
 {
     std::default_random_engine generator;
     std::uniform_real_distribution<float> distribution(lo, up);
-    for (size_t i = 0; i < length; i++)
+    for (size_t i = 0; i < _length; i++)
     {
         data[i] += distribution(generator);
     }
@@ -125,10 +125,10 @@ Heston::Heston(const float& rh, const float& kapp, const float& thet,
     theta = thet;
     sigma = sgm;
     r = rr; // risk neutral meassure
-    length = N;
+    _length = N;
 
-    zv = std::make_unique<double[]>(length);
-    zs = std::make_unique<double[]>(length);
+    zv = std::make_unique<double[]>(_length);
+    zs = std::make_unique<double[]>(_length);
     update_zv_zs();
 }
 
@@ -140,7 +140,7 @@ void Heston::update_zv_zs(){
     // std::default_random_engine de(time(0)); //seed
     // std::normal_distribution<double> nd(0.0, 1.0); //mean followed by stdiv
 
-    for (size_t i=0; i < length; ++i){
+    for (size_t i=0; i < _length; ++i){
         zv[i] = distribution(rd);
         zs[i] = rho * zv[i] + sqrt(1- pow(rho, 2))*distribution(rd);
     }
@@ -152,7 +152,7 @@ void Heston::generate(const double v0, const double s0, const double dt)
     double vi = v0;
     update_zv_zs();
     data[0] = s0;
-    for (size_t i = 1; i < length; i++)
+    for (size_t i = 1; i < _length; i++)
     {
         v1 = vi + kappa * (theta - vi)*dt + sigma * std::sqrt(vi * dt) * zv[i] + .25 * std::pow(sigma, 2.0) * dt * (std::pow(zv[i], 2.0) - 1.0);
 
@@ -168,7 +168,7 @@ void Heston::generate(const double v0, const double s0, const double dt)
 std::ostream &operator<<(std::ostream &os, Signal &s)
 {
     os << "[ ";
-    for (size_t i = 0; i < s.length; i++)
+    for (size_t i = 0; i < s._length; i++)
     {
         os << s.data[i] << " ";
     }

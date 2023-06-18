@@ -10,32 +10,29 @@ class Signal
 public:
     std::unique_ptr<float[]> data;
 
-    size_t length;
+    size_t _length;
     /*
     /// @brief Constructor create a constant signal
     /// @param amp  amplitude of the signal
     /// @param length duration
     */
     Signal(const float amp, const size_t length);
-
-    ~Signal() { data.reset(); };
-
-    friend std::ostream &operator<<(std::ostream &os, Signal &s);
-
     Signal operator+(const Signal &s);
     /// @brief construct a constant signal from another signal
     /// @param sgnal another signal object
     Signal(const Signal &sgnal);
+    ~Signal() { data.reset(); };
 
     float &operator[](size_t i);
 
     /// @brief get the length of the signal
     /// @return the length
-    size_t getLength() { return length; }
+    size_t length() { return _length; }
 
     float getPosition(size_t pos);
 
     void generate();
+    friend std::ostream &operator<<(std::ostream &os, Signal &s);
 };
 
 class Sin : public Signal
