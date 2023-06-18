@@ -16,15 +16,29 @@ Option::Option(const float& _S, const float& _K, const float& _T,
                 const float& _r, const float& _sigma,
                 const float& _Q):S0(_S), K(_K), T(_T), r(_r), sigma(_sigma), Q(_Q){}
 
-BSM::BSM(float s0, float k, float t, float rr, float sma, float q)
-{
-    S0 = s0;
-    K = k;
-    r = rr;
-    sigma = sma;
-    T = t;
-    Q = q;
+void Option::copy(const Option& _option){
+    S0 = _option.S0;
+    K = _option.K;
+    T = _option.T;
+    r = _option.r;
+    sigma = _option.sigma;
+    Q = _option.Q;
 }
+
+Option::Option(const Option& _option){
+    copy(_option);
+}
+
+Option& Option::operator=(const Option& rhs){
+    if (this == &rhs){
+        return *this;
+    }
+    copy(rhs);
+    return *this;
+}
+
+BSM::BSM(const float& s0, const float& k, const float& t, const float& rr,
+    const float& sma, const float& q):Option(s0, k, t, rr, sma, q){}
 
 float BSM::grealT() const
 {

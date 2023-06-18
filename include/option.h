@@ -11,7 +11,9 @@ class Option
 public:
     Option();
     Option(const float& _S0, const float& _K, const float& _T,
-    const float& _r, const float& _sigma, const float& _Q);
+        const float& _r, const float& _sigma, const float& _Q);
+    Option(const Option & _option);
+    Option& operator=(const Option& rhs);
     float gS0() const { return S0; };
     float gK() const { return K; };
     float gexT() const { return T; }
@@ -35,6 +37,8 @@ public:
     virtual void print(std::ostream &o) const = 0;
 protected:
     float S0, K, T, r, sigma, Q;
+private:
+    void copy(const Option&);
 };
 
 inline std::ostream &operator<<(std::ostream &os, const Option &option)
@@ -55,7 +59,8 @@ private:
     float grealT() const;
 
 public:
-    BSM(float S0, float K, float T, float r, float sigma, float Q);
+    BSM(const float& S0, const float& K, const float& T,
+        const float& r, const float& sigma, const float& Q);
     float d1() const;
     float d2() const;
     float C() const;
