@@ -117,8 +117,8 @@ Heston::Heston() : Heston(.8, 21, .1, .3, .09, 21)
 {
 }
 
-Heston::Heston(const float rh, const float kapp, const float thet,
-               const float sgm, const float rr, const size_t N) : Signal(0, N)
+Heston::Heston(const float& rh, const float& kapp, const float& thet,
+               const float& sgm, const float& rr, const size_t& N) : Signal(0, N)
 {
     rho = rh;
     kappa = kapp;

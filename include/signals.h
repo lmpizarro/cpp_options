@@ -79,8 +79,8 @@ private:
 
 public:
     Heston();
-    Heston(const float rh, const float kapp, const float thet,
-           const float sgm, const float rr, const size_t N);
+    Heston(const float& rh, const float& kapp, const float& thet,
+           const float& sgm, const float& rr, const size_t& N);
     void generate(const double v0, const double s0, const double dt);
     ~Heston(){zv.reset(); zs.reset();}
 };
