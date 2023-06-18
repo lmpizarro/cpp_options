@@ -1,5 +1,5 @@
-#ifndef OPT_SIM_H
-#define OPT_SIM_H
+#ifndef __OPT_SIM_H
+#define __OPT_SIM_H
 #include "signals.h"
 #include "option.h"
 

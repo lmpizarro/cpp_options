@@ -1,5 +1,5 @@
-#ifndef CDF_HH
-#define CDF_HH
+#ifndef __CDF_H
+#define __CDF_H
 
 class NormalCDF
 {

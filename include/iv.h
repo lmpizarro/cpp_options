@@ -1,5 +1,5 @@
-#ifndef IV_H
-#define IV_H
+#ifndef __IV_H
+#define __IV_H
 
 #include "option.h"
 

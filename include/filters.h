@@ -1,5 +1,5 @@
-#ifndef FILTERS_HH
-#define FILTERS_HH
+#ifndef __FILTERS_H
+#define __FILTERS_H
 
 #include "filter_coeffs.h"
 #include "signals.h"

@@ -1,6 +1,6 @@
 
-#ifndef OPTION_HH
-#define OPTION_HH
+#ifndef __OPTION_H
+#define __OPTION_H
 #include <iostream>
 #include "cdf.h"
 
@@ -9,6 +9,9 @@ const float ONE_DAY = 1.0 / 365.0;
 class Option
 {
 public:
+    Option();
+    Option(const float& _S0, const float& _K, const float& _T,
+    const float& _r, const float& _sigma, const float& _Q);
     float gS0() const { return S0; };
     float gK() const { return K; };
     float gexT() const { return T; }
@@ -31,7 +34,7 @@ public:
 
     virtual void print(std::ostream &o) const = 0;
 protected:
-    float S0, K, r, sigma, T, Q;
+    float S0, K, T, r, sigma, Q;
 };
 
 inline std::ostream &operator<<(std::ostream &os, const Option &option)

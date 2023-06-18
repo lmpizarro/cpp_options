@@ -1,5 +1,5 @@
-#ifndef HEDGE_H
-#define HEDGE_H
+#ifndef __HEDGE_H
+#define __HEDGE_H
 
 class Hedge
 {

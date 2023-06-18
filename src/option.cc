@@ -2,6 +2,20 @@
 #include <iostream>
 #include "option.h"
 
+Option::Option()
+{
+    K = 100.0;
+    r = 0.05;
+    T = 1.0;
+    S0 = 100.0;
+    sigma = 0.2;
+    Q = 0.015;
+}
+
+Option::Option(const float& _S, const float& _K, const float& _T,
+                const float& _r, const float& _sigma,
+                const float& _Q):S0(_S), K(_K), T(_T), r(_r), sigma(_sigma), Q(_Q){}
+
 BSM::BSM(float s0, float k, float t, float rr, float sma, float q)
 {
     S0 = s0;

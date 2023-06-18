@@ -1,9 +1,8 @@
-#ifndef SIGNALS_HH
-#define SIGNALS_HH
+#ifndef __SIGNALS_H
+#define __SIGNALS_H
 
 #include <memory>
 #include <vector>
-// using namespace std;
 /*
  */
 class Signal
@@ -71,16 +70,17 @@ public:
 
 class Heston : public Signal
 {
-    private:
+private:
     double rho, kappa, theta, sigma, r;
 
     std::unique_ptr<double[]> zv;
     std::unique_ptr<double[]> zs;
     void update_zv_zs();
+
 public:
     Heston();
     Heston(const float rh, const float kapp, const float thet,
-        const float sgm, const float rr, const size_t N);
+           const float sgm, const float rr, const size_t N);
     void generate(const double v0, const double s0, const double dt);
 };
 

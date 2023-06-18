@@ -1,6 +1,6 @@
 
-#ifndef AUX_HH
-#define AUX_HH
+#ifndef __AUX_H
+#define __AUX_H
 
 
 #include <iostream>

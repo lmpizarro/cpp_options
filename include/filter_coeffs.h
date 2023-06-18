@@ -1,5 +1,5 @@
-#ifndef CALC_FRAC_HH
-#define CALC_FRAC_HH
+#ifndef __CALC_FRAC_H
+#define __CALC_FRAC_H
 
 #include <memory>
 #include <vector>

@@ -1,5 +1,5 @@
-#ifndef TEST_FRAC_DEV_HH
-#define TEST_FRAC_DEV_HH
+#ifndef __TEST_FRAC_DEV_H
+#define __TEST_FRAC_DEV_H
 
 int ex_fracdev();
 
