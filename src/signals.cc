@@ -39,7 +39,7 @@ float &Signal::operator[](size_t i)
 {
     if (i >= length)
     {
-        cout << "Index out of bounds " << length << endl;
+        std::cout << "Index out of bounds " << length << std::endl;
         return data[0];
     }
     return data[i];
@@ -165,13 +165,13 @@ void Heston::generate(const double v0, const double s0, const double dt)
     // cout << "rho " << rho << " kappa " << kappa << " theta " << theta << " sigma " << sigma << " rr " << r << endl;
 }
 
-ostream &operator<<(ostream &os, Signal &s)
+std::ostream &operator<<(std::ostream &os, Signal &s)
 {
     os << "[ ";
     for (size_t i = 0; i < s.length; i++)
     {
         os << s.data[i] << " ";
     }
-    os << "]" << endl;
+    os << "]" << std::endl;
     return os;
 };

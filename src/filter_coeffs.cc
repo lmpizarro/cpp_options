@@ -38,14 +38,14 @@ WMA4::WMA4():FirCoeffs(4){
     coefficients[3]  = 1.0/10.0;
 };
 
-ostream &operator<<(ostream &os, FirCoeffs &s)
+std::ostream &operator<<(std::ostream &os, FirCoeffs &s)
 {
     os << "[ ";
     for (size_t i = 0; i < s.n_coefficients; i++)
     {
         os << s.coefficients[i] << " ";
     }
-    os << "]" << endl;
+    os << "]" << std::endl;
     return os;
 };
 
@@ -53,7 +53,7 @@ float &FirCoeffs::operator[](size_t i)
 {
     if (i >= n_coefficients)
     {
-        cout << "Index out of bounds " << n_coefficients << endl;
+        std::cout << "Index out of bounds " << n_coefficients << std::endl;
         return coefficients[0];
     }
     return coefficients[i];

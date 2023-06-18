@@ -20,7 +20,7 @@ int ex_option_0()
     BSM option(49.0, 50.0, .3846, 0.05, .2, 0.0);
 
     std::cout << option.gexT() << "," << option.gS0() << "," << option.C() << ","
-    << option.deltaC() << "," << option.gamma() << "," << option.thetaC(true) << endl;
+    << option.deltaC() << "," << option.gamma() << "," << option.thetaC(true) << std::endl;
 
     return 0;
 }
@@ -32,35 +32,35 @@ int ex_option()
     StandardNormalCDF sncdf;
     BSM option(49.0, 50.0, .3846, 0.05, .2, 0.0);
 
-    std::cout << "d " << hedge.d() << endl;
-    std::cout << "u " << hedge.u() << endl;
-    std::cout << "p " << hedge.p() << endl;
-    std::cout << "pp " << hedge.pp() << endl;
-    std::cout << "ncdf " << ncdf.cdf(-0.0) << endl;
-    std::cout << "sncdf " << sncdf.cdf(-0.0) << endl;
-    std::cout << "d1 " << option.d1() << endl;
-    std::cout << "d2 " << option.d2() << endl;
-    std::cout << "N d1 " << sncdf.cdf(option.d1()) << endl;
-    std::cout << "N d2 " << sncdf.cdf(option.d1()) << endl;
-    std::cout << "Call " << option.C() << endl;
-    std::cout << "Put " << option.P() << endl;
-    std::cout << "delta Put " << option.deltaP() << endl;
-    std::cout << "delta Call " << option.deltaC() << endl;
-    std::cout << "gamma  " << option.gamma() << endl;
-    std::cout << "thetaC  " << option.thetaC(true) << endl;
-    std::cout << "rhoC  " << option.rhoC() << endl;
-    std::cout << "rhoP  " << option.rhoP() << endl;
-    std::cout << "vega  " << option.vega() << endl;
+    std::cout << "d " << hedge.d() << std::endl;
+    std::cout << "u " << hedge.u() << std::endl;
+    std::cout << "p " << hedge.p() << std::endl;
+    std::cout << "pp " << hedge.pp() << std::endl;
+    std::cout << "ncdf " << ncdf.cdf(-0.0) << std::endl;
+    std::cout << "sncdf " << sncdf.cdf(-0.0) << std::endl;
+    std::cout << "d1 " << option.d1() << std::endl;
+    std::cout << "d2 " << option.d2() << std::endl;
+    std::cout << "N d1 " << sncdf.cdf(option.d1()) << std::endl;
+    std::cout << "N d2 " << sncdf.cdf(option.d1()) << std::endl;
+    std::cout << "Call " << option.C() << std::endl;
+    std::cout << "Put " << option.P() << std::endl;
+    std::cout << "delta Put " << option.deltaP() << std::endl;
+    std::cout << "delta Call " << option.deltaC() << std::endl;
+    std::cout << "gamma  " << option.gamma() << std::endl;
+    std::cout << "thetaC  " << option.thetaC(true) << std::endl;
+    std::cout << "rhoC  " << option.rhoC() << std::endl;
+    std::cout << "rhoP  " << option.rhoP() << std::endl;
+    std::cout << "vega  " << option.vega() << std::endl;
 
     ImpliedVolatility  Iv(&option);
     float price = 1.31;
     float iv = Iv.bisection(price, 0, 1);
     option.setIV(iv);
-    std::cout << "Call IV calc bisection " << iv << " est price " << option.C() << "price " << price << endl;
+    std::cout << "Call IV calc bisection " << iv << " est price " << option.C() << "price " << price << std::endl;
     option.setIV(.5);
     iv = Iv.regulaFalsi(price, 0, 1);
     option.setIV(iv);
-    std::cout << "Call IV calc regulaFalsi " << iv << " est price " << option.C() << " price " << price << endl;
+    std::cout << "Call IV calc regulaFalsi " << iv << " est price " << option.C() << " price " << price << std::endl;
     Signal sgnal(100, 10);
 
     Normal nrml(0, 1, 252);
@@ -71,9 +71,9 @@ int ex_option()
 
     Uniform uu = un + unfrm;
 
-    std::cout << uu << endl;
-    std::cout << un << endl;
-    std::cout << un[0] << endl;
+    std::cout << uu << std::endl;
+    std::cout << un << std::endl;
+    std::cout << un[0] << std::endl;
     return 0;
 };
 

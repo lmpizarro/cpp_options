@@ -11,13 +11,13 @@ const int GRUNWALD_LETNIKOV_COEFS = 10;
 class FirCoeffs
 {
 protected:
-    unique_ptr<float[]> coefficients;
+    std::unique_ptr<float[]> coefficients;
     size_t n_coefficients;
 
 public:
     FirCoeffs(const size_t);
 
-    friend ostream &operator<<(ostream &os, FirCoeffs &s);
+    friend std::ostream &operator<<(std::ostream &os, FirCoeffs &s);
 
     float &operator[](size_t i);
     float getCoefficient(size_t position);

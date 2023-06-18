@@ -28,10 +28,10 @@ void FirFilter::run()
     }
 }
 
-void Filter::csvResult(const string filename)
+void Filter::csvResult(const std::string filename)
 {
-    fstream fout;
-    fout.open(filename, ios::out);
+    std::fstream fout;
+    fout.open(filename, std::ios::out);
     std::string out_str = "t,inp,out\n";
     for (size_t i = 0; i < getOutput()->getLength(); i++)
     {
@@ -39,7 +39,7 @@ void Filter::csvResult(const string filename)
         float out__ = getOutput()->getPosition(i);
         out_str += std::to_string(i) + "," + std::to_string(inp__) + "," + std::to_string(out__) + "\n";
     }
-    fout << out_str << endl;
+    fout << out_str << std::endl;
     fout.close();
 }
 

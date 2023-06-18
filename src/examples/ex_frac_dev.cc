@@ -19,8 +19,8 @@ int ex_fracdev()
     FirFilter firfilter(&fracDev,&inp, &out);
     firfilter.run();
 
-    std::cout << fracDev << endl;
-    std::cout << out << endl;
+    std::cout << fracDev << std::endl;
+    std::cout << out << std::endl;
     firfilter.csvResult("filter_out.csv");
 
     return 0;

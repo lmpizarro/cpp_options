@@ -3,13 +3,13 @@
 
 #include <memory>
 #include <vector>
-using namespace std;
+// using namespace std;
 /*
  */
 class Signal
 {
 public:
-    unique_ptr<float[]> data;
+    std::unique_ptr<float[]> data;
 
     size_t length;
     /*
@@ -21,7 +21,7 @@ public:
 
     ~Signal() { data.reset(); };
 
-    friend ostream &operator<<(ostream &os, Signal &s);
+    friend std::ostream &operator<<(std::ostream &os, Signal &s);
 
     Signal operator+(const Signal &s);
     /// @brief construct a constant signal from another signal
@@ -74,8 +74,8 @@ class Heston : public Signal
     private:
     double rho, kappa, theta, sigma, r;
 
-    unique_ptr<double[]> zv;
-    unique_ptr<double[]> zs;
+    std::unique_ptr<double[]> zv;
+    std::unique_ptr<double[]> zs;
     void update_zv_zs();
 public:
     Heston();
