@@ -8,9 +8,10 @@ class Simulator
 private:
     BSM option;
     Signal S;
+    Linear time;
 
 public:
-    Simulator(BSM &opt, Signal & signal);
+    Simulator(BSM &opt, Signal & signal, Linear & lin);
     void run(std::string);
 };
 

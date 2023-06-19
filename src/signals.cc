@@ -57,6 +57,20 @@ float Signal::getPosition(size_t pos)
     }
 }
 
+Signal& Signal::operator=(const Signal& rhs){
+    if (this == &rhs){
+        return *this;
+    }
+
+    _length = rhs._length;
+    data = std::make_unique<float[]>(_length);
+    for (size_t i = 0; i < _length; i++)
+    {
+        data[i] = rhs.data[i];
+    }
+    return *this;
+}
+
 Uniform Uniform::operator+(const Uniform &s)
 {
     Uniform sum(s);
@@ -175,3 +189,12 @@ std::ostream &operator<<(std::ostream &os, Signal &s)
     os << "]" << std::endl;
     return os;
 };
+
+Linear::Linear(const float &init, const float &end, size_t &N): Signal(0, N){
+    float delta = (end - init) / N ;
+
+    data[0] = init;
+    for (size_t i =1; i < N; i++){
+        data[i] = data[i-1] + delta;
+    }
+}

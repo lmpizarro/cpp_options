@@ -81,7 +81,8 @@ int ex_sim_option(){
     size_t length = 252;
     Sin price_t(49.0, 0, 1.0, length);
     BSM option(49, 50.0, 1.0, 0.05, .2, 0.03);
-    Simulator sim(option, price_t);
+    Linear time(0.0, 1.0, length);
+    Simulator sim(option, price_t, time);
     sim.run("datos.csv");
     return 0;
 }
